@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993c883dd5f9c0b41b50c3d3557a7d4d, type: 3}
+  m_Name: Idle
+  m_EditorClassIdentifier: 
+  animationSprites:
+  - {fileID: 21300000, guid: 4762770584f4e4f40b22dbf23566dd5b, type: 3}
+  - {fileID: 21300000, guid: c74491e96c457114d9adb1fa0c88e0cb, type: 3}
+  - {fileID: 21300000, guid: 01de3462a94028940a0c3fc03564c2d2, type: 3}
+  - {fileID: 21300000, guid: 60563a60e7457f242b1532912c8cb5bb, type: 3}
+  - {fileID: 21300000, guid: 21538b154ffc2704881f665f4cddca41, type: 3}
+  animation: 0
+  dropDownName: Idle
+  dropDownSprite: {fileID: 0}
