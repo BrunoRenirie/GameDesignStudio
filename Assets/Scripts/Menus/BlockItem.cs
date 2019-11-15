@@ -34,6 +34,11 @@ public class BlockItem : MonoBehaviour
             LevelEditorUi._Instance._CurrentTile = _BlockNumber;
         }
 
-        Debug.Log("IK BEN GEKLIKT!");
+        CloseScreen();
+    }
+
+    private void CloseScreen()
+    {
+        gameObject.SetActive(false);
     }
 }

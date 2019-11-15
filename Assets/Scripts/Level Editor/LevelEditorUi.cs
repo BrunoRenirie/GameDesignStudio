@@ -20,10 +20,11 @@ public class LevelEditorUi : MonoBehaviour
     private int _DropdownSize = -1;
 
     [HideInInspector] public int _CurrentTile;
+    [SerializeField] private GameObject _BlockScreen;
 
     private void Awake()
     {
-        _Instance = this;      
+        _Instance = this;
     }
 
     private void Start()
@@ -96,7 +97,7 @@ public class LevelEditorUi : MonoBehaviour
 
             //dropDownOptions.Add(tileDropdown);
         }
-        
+
         //_Dropdown.AddOptions(dropDownOptions);
         //_Dropdown.RefreshShownValue();
 
@@ -106,5 +107,10 @@ public class LevelEditorUi : MonoBehaviour
     public void SetBackground(Sprite image)
     {
         _Background.sprite = image;
-    }z
+    }
+
+    public void OpenGallery()
+    {
+        _BlockScreen.SetActive(true);
+    }
 }
