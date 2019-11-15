@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class BlockGallery : MonoBehaviour
 {
@@ -11,28 +10,13 @@ public class BlockGallery : MonoBehaviour
     [SerializeField] private GameObject _BlockHolder;
     [Space]
     [SerializeField] private Image _ExampleImage;
-    [SerializeField] private TextMeshProUGUI _ExampleText;
+
 
     [Header("Blocks")]
     [SerializeField] private List<GameObject> _BlockList = new List<GameObject>();
 
     private BlockItem _BlockItemScript;
 
-
-    void Start()
-    {
-        CloseBlockPanel();
-    }
-
-    void Update()
-    {
-        
-    }
-
-    public void AddBlock(Sprite block)
-    {
-
-    }
 
     public void OpenBlockPanel()
     {
@@ -67,6 +51,6 @@ public class BlockGallery : MonoBehaviour
 
     public void CloseBlockPanel()
     {
-        _HolderPanel.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

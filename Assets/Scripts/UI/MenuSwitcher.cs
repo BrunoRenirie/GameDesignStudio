@@ -54,10 +54,4 @@ public class MenuSwitcher : MonoBehaviour
         animator.SetBool("CreditsStart", isOpen);
         isUsed = false;
     }
-
-    public void ButtonClickSound(AudioClip buttonAudio)
-    {
-        buttonSource.clip = buttonAudio;
-        buttonSource.Play();
-    }
 }
