@@ -105,5 +105,5 @@ public class LevelEditorUi : MonoBehaviour
     public void SetBackground(Sprite image)
     {
         _Background.sprite = image;
-    }
+    }z
 }
