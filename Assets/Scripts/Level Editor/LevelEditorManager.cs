@@ -179,4 +179,9 @@ public class LevelEditorManager : MonoBehaviour
 
         return tileDict;
     }
+
+    public void ResetLevel()
+    {
+        _TileMap.ClearAllTiles();
+    }
 }
