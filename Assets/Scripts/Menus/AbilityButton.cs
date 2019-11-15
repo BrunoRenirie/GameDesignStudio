@@ -43,7 +43,7 @@ public class AbilityButton : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void PressButton()
@@ -51,7 +51,7 @@ public class AbilityButton : MonoBehaviour
         switch (_CurrentAbility)
         {
             case Abilities.Shoot:
-                
+
                 break;
             case Abilities.Ability2:
 

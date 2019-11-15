@@ -6,10 +6,7 @@ using TMPro;
 
 public class BlockGallery : MonoBehaviour
 {
-    //[SerializeField] private List<Blokken> BlockList = new List<Blokken>();
-
     [Header("UI")]
-    [SerializeField] private UIManager _UImanager;
     [SerializeField] private GameObject _HolderPanel;
     [SerializeField] private GameObject _BlockHolder;
     [Space]
@@ -17,12 +14,14 @@ public class BlockGallery : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _ExampleText;
 
     [Header("Blocks")]
-    [SerializeField] private List<Image> _BlockList = new List<Image>();
+    [SerializeField] private List<GameObject> _BlockList = new List<GameObject>();
+
+    private BlockItem _BlockItemScript;
 
 
     void Start()
     {
-        _HolderPanel.transform.localScale = new Vector3(0, 0, 0);
+        CloseBlockPanel();
     }
 
     void Update()
@@ -30,42 +29,44 @@ public class BlockGallery : MonoBehaviour
         
     }
 
-    public void AddBlock(Sprite _block)
+    public void AddBlock(Sprite block)
     {
-        Image newBlock = null;
 
-        newBlock = Instantiate(_ExampleImage, new Vector3(0, 0, 0), Quaternion.identity);
-
-        newBlock.sprite = _block;
-
-        newBlock.transform.SetParent(_BlockHolder.transform);
-        newBlock.gameObject.SetActive(true);
-
-        TextMeshProUGUI newText = newBlock.GetComponentInChildren<TextMeshProUGUI>();
-
-        if (newText != null)
-            newText.text = newBlock.sprite.name;
-
-        _BlockList.Add(newBlock);
     }
 
     public void OpenBlockPanel()
     {
-        _HolderPanel.transform.localScale = new Vector3(1, 1, 1);
-
-        foreach (Image block in _BlockList)
+        foreach (GameObject block in _BlockList)
         {
-            block.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+            Destroy(block);
         }
+
+        for (int i = 0; i < TileManager._Instance._Tiles.Count; i++)
+        {
+            Image block = _ExampleImage;
+            block.sprite = TileManager._Instance._Tiles[i]._Image;
+
+            Image newBlock = null;
+
+            newBlock = Instantiate(block, new Vector3(0, 0, 0), Quaternion.identity);
+
+            _BlockItemScript = newBlock.GetComponent<BlockItem>();
+
+            _BlockList.Add(newBlock.gameObject);
+
+            newBlock.transform.parent = _BlockHolder.transform;
+
+            _BlockItemScript._BlockNumber = i;
+            _BlockItemScript.GiveName(TileManager._Instance._Tiles[i]._Name);
+
+            newBlock.gameObject.SetActive(true);
+        }
+
+        _HolderPanel.SetActive(true);
     }
 
     public void CloseBlockPanel()
     {
-        _HolderPanel.transform.localScale = new Vector3(0, 0, 0);
-
-        foreach (Image block in _BlockList)
-        {
-            block.transform.localScale = new Vector3(0, 0, 0);
-        }
+        _HolderPanel.SetActive(false);
     }
 }
