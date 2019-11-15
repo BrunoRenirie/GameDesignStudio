@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class BlockItem : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class BlockItem : MonoBehaviour
     public int _BlockNumber;
     [SerializeField] private string _BlockName;
     [Space]
-    [SerializeField] private TextMeshProUGUI _BlockText;
+    [SerializeField] private Text _BlockText;
 
     public void GiveNumber(int number)
     {
