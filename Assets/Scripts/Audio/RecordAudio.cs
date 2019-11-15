@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class RecordAudio : MonoBehaviour {
 	public Slider timeslide;
 	public Timer time;
 	public Dropdown AudioSelect;
+	public event Action ButtonPress;
 
 	void Start() {
 		device = GetDevice();
@@ -17,6 +19,7 @@ public class RecordAudio : MonoBehaviour {
 	}
 
 	public void ButtonPressed() {
+		ButtonPress();
 		ResetClip();
 		RecordClip((int)timeslide.value);
 	}
@@ -34,6 +37,7 @@ public class RecordAudio : MonoBehaviour {
 	}
 
 	private void StopRecord() {
+		ButtonPress();
 		Microphone.End(device);
 		SaveClip(source, GetFileName(AudioSelect));
 	}
