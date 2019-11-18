@@ -3,6 +3,8 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using SimpleFileBrowser;
+using System.Collections;
 
 public class RecordAudio : MonoBehaviour {
 	private string device;
@@ -11,11 +13,14 @@ public class RecordAudio : MonoBehaviour {
 	public Timer time;
 	public Dropdown AudioSelect;
 	public event Action ButtonPress;
+	private string musicPath;
 
 	void Start() {
+		FileBrowser.SetDefaultFilter(".wav");
 		device = GetDevice();
 		time = gameObject.GetComponent<Timer>();
 		time.TimerDone += StopRecord;
+		musicPath = Application.streamingAssetsPath + @"/Music/audio/Main menu-wav.wav";
 	}
 
 	public void ButtonPressed() {
@@ -56,19 +61,21 @@ public class RecordAudio : MonoBehaviour {
 		source = null;
 	}
 
-	private string OpenFile() {
-		string location = EditorUtility.OpenFilePanel("Select file", "", "wav");
+	/*private string OpenFile() {
+		string location = StartCoroutine(ShowDialog());
 		return location;
-	}
+	}*/
 
 	public void CopyFile() {
-		string path = Application.persistentDataPath + @"/Audio/" + GetFileName(AudioSelect) + ".wav";
+		StartCoroutine(Copy());
+
+		/*string path = Application.persistentDataPath + @"/Audio/" + GetFileName(AudioSelect) + ".wav";
 
 		if (!File.Exists(path)) {
 			FileUtil.CopyFileOrDirectory(OpenFile(), path);			
 		} else {
 			FileUtil.ReplaceFile(OpenFile(), path);
-		}
+		}*/
 		
 	}
 
@@ -106,5 +113,15 @@ public class RecordAudio : MonoBehaviour {
 		}
 
 		return null;
+	}
+
+	IEnumerator Copy() {
+		yield return FileBrowser.WaitForLoadDialog(false, null, "Kies bestand", "Laad");
+
+		if (FileBrowser.Success) {
+			byte[] bytes = FileBrowserHelpers.ReadBytesFromFile(FileBrowser.Result);
+			FileBrowserHelpers.WriteBytesToFile(musicPath, bytes);
+
+		}
 	}
 }
