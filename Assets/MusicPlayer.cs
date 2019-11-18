@@ -18,6 +18,10 @@ public class MusicPlayer : MonoBehaviour {
 		print("lol");
 	}
 
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.P)) background.Play();
+	}
+
 
 	private void LoadAudio(int index) {
 		switch (index) {
