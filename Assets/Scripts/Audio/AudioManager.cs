@@ -6,25 +6,33 @@ public class AudioManager : MonoBehaviour {
 	private Player _player;
 	private string[] paths;
 	private AudioClip clip;
+	private AudioClip musicTrack;
 	private AudioSource source;
+	private GameObject musicObject;
+	private AudioSource music;
+	private string path;
 
 
 	void Start() {
-		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		path = Application.persistentDataPath + @"/Audio";
+		_player = GameObject.Find("Player").GetComponent<Player>();
 		_player.OnStateChange += PlayAudio;
 		source = gameObject.AddComponent<AudioSource>();
 
-		paths = new string[9]{
-			Application.dataPath + "/Audio/idle.wav",
-			Application.dataPath + "/Audio/move.wav",
-			Application.dataPath + "/Audio/jump.wav",
-			Application.dataPath + "/Audio/fall.wav",
-			Application.dataPath + "/Audio/shoot.wav",
-			Application.dataPath + "/Audio/duck.wav",
-			Application.dataPath + "/Audio/hurt.wav",
-			Application.dataPath + "/Audio/defeat.wav",
-			Application.dataPath + "/Audio/second.wav"
+		paths = new string[10]{
+			path + @"/idle.wav",
+			path + @"/move.wav",
+			path + @"/jump.wav",
+			path + @"/fall.wav",
+			path + @"/shoot.wav",
+			path + @"/duck.wav",
+			path + @"/hurt.wav",
+			path + @"/defeat.wav",
+			path + @"/second.wav",
+			path + @"/music.wav"
 		};
+
+		//Init();
 	}
 
 	private void PlayAudio(PlayerState state) {
@@ -69,23 +77,31 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	private void PlaySound(int index) {
-
-		StartCoroutine(GetAudioClip(paths[index]));
-		source.clip = clip;
+		//StartCoroutine(GetAudioClip(paths[index]));
+		source.clip = ES3.LoadAudio(paths[index], AudioType.WAV);
 		source.Play();
 	}
 
 	IEnumerator GetAudioClip(string location) {
 		using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(location, AudioType.WAV)) {
 
-			yield return www.Send();
+			yield return www.SendWebRequest();
 
 			if (www.isNetworkError) {
 				Debug.Log(www.error);
 			} else {
+				print("location = " + location);
 				clip = DownloadHandlerAudioClip.GetContent(www);
 			}
 		}
 
+	}
+
+	private void Init() {
+		musicObject = GameObject.Find("Music");
+		music = musicObject.AddComponent<AudioSource>();
+		music.loop = true;
+		//StartCoroutine(GetAudioClip(paths[9]));
+		music.clip = ES3.LoadAudio(paths[9], AudioType.WAV); ;
 	}
 }

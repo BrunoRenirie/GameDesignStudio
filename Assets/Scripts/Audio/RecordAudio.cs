@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using System;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class RecordAudio : MonoBehaviour {
@@ -7,17 +10,17 @@ public class RecordAudio : MonoBehaviour {
 	public Slider timeslide;
 	public Timer time;
 	public Dropdown AudioSelect;
+	public event Action ButtonPress;
 
 	void Start() {
 		device = GetDevice();
 		time = gameObject.GetComponent<Timer>();
 		time.TimerDone += StopRecord;
-		print(AudioSelect.value);
 	}
 
 	public void ButtonPressed() {
+		ButtonPress();
 		ResetClip();
-		print(AudioSelect.value);
 		RecordClip((int)timeslide.value);
 	}
 
@@ -34,6 +37,7 @@ public class RecordAudio : MonoBehaviour {
 	}
 
 	private void StopRecord() {
+		ButtonPress();
 		Microphone.End(device);
 		SaveClip(source, GetFileName(AudioSelect));
 	}
@@ -50,6 +54,22 @@ public class RecordAudio : MonoBehaviour {
 		if (source == null) return;
 
 		source = null;
+	}
+
+	private string OpenFile() {
+		string location = EditorUtility.OpenFilePanel("Select file", "", "wav");
+		return location;
+	}
+
+	public void CopyFile() {
+		string path = Application.persistentDataPath + @"/Audio/" + GetFileName(AudioSelect) + ".wav";
+
+		if (!File.Exists(path)) {
+			FileUtil.CopyFileOrDirectory(OpenFile(), path);			
+		} else {
+			FileUtil.ReplaceFile(OpenFile(), path);
+		}
+		
 	}
 
 	private string GetFileName(Dropdown dropdown) {
@@ -80,6 +100,9 @@ public class RecordAudio : MonoBehaviour {
 
 			case 8:
 				return "second";
+
+			case 9: 
+				return "music";
 		}
 
 		return null;

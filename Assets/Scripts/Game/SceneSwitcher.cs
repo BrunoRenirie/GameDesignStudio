@@ -73,5 +73,11 @@ public class SceneSwitcher : MonoBehaviour
     {
         AsyncOperation loadScene = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
         yield return new WaitUntil(() => loadScene.isDone);
+        SceneManager.UnloadSceneAsync(scene);
+    }
+
+    public void ReturnButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }
