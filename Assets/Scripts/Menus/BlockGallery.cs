@@ -51,6 +51,6 @@ public class BlockGallery : MonoBehaviour
 
     public void CloseBlockPanel()
     {
-        gameObject.SetActive(false);
+        _HolderPanel.SetActive(false);
     }
 }
