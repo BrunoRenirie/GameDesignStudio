@@ -1,5 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
 guid: 117afbc136cb6e443b7a823eecbc9844
+=======
+<<<<<<< HEAD:Assets/Resources/;p;.png.meta
+guid: a3e7f8de2bc23314eba79ebc567e8274
+=======
+guid: 117afbc136cb6e443b7a823eecbc9844
+>>>>>>> ecc4a3b1759c314a5c7adde04e5c536a6a85e43f:Assets/Resources/Halloooo.png.meta
+>>>>>>> ecc4a3b1759c314a5c7adde04e5c536a6a85e43f
+=======
+guid: 117afbc136cb6e443b7a823eecbc9844
+>>>>>>> ecc4a3b1759c314a5c7adde04e5c536a6a85e43f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
