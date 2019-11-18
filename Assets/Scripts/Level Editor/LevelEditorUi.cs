@@ -108,13 +108,9 @@ public class LevelEditorUi : MonoBehaviour
     {
         _Background.sprite = image;
     }
-<<<<<<< HEAD
-}
-=======
 
     public void OpenGallery()
     {
         _BlockScreen.SetActive(true);
     }
 }
->>>>>>> ebe537e260e46a599a3ab6b0e51c4196900cc957

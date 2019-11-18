@@ -34,7 +34,7 @@ public class BlockItem : MonoBehaviour
             LevelEditorUi._Instance._CurrentTile = _BlockNumber;
         }
 
-        CloseScreen();
+        //CloseScreen();
     }
 
     private void CloseScreen()
