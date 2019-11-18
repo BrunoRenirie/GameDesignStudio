@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private bool _Slowing;
     private float _RefFloat;
     private bool _Frozen, _EditMode;
+    private Vector2 originalVector;
 
     public event Action<PlayerState> OnStateChange;
 
@@ -55,13 +56,18 @@ public class Player : MonoBehaviour
         _Animator = GetComponent<Animator>();
         _Health = GetComponent<Health>();
 
+        originalVector = transform.position;
         //EditMode();
     }
 
     private void Update()
     {
+        if (transform.position.y < -70f)
+        {
+            transform.position = originalVector;
+        }
         //if (_EditMode)
-            //return;
+        //return;
 
         _Velocity.x = Input.GetAxis("Horizontal");
 
@@ -80,6 +86,7 @@ public class Player : MonoBehaviour
         }
 
         _Animator.SetInteger("State", (int)_State);
+
     }
 
     private void FixedUpdate()
