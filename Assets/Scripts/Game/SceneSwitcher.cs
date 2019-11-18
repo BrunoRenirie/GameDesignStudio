@@ -75,4 +75,9 @@ public class SceneSwitcher : MonoBehaviour
         yield return new WaitUntil(() => loadScene.isDone);
         SceneManager.UnloadSceneAsync(scene);
     }
+
+    public void ReturnButton()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
