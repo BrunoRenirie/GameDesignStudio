@@ -2628,6 +2628,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: -1
   m_TargetDisplay: 0
+<<<<<<< HEAD
 --- !u!1001 &999410236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2697,6 +2698,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ca2d9543d53052418f8ddc116a01678, type: 3}
+=======
+>>>>>>> ecc4a3b1759c314a5c7adde04e5c536a6a85e43f
 --- !u!1 &1007837721
 GameObject:
   m_ObjectHideFlags: 0
