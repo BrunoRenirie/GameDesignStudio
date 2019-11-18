@@ -20,7 +20,7 @@ public class RecordAudio : MonoBehaviour {
 		device = GetDevice();
 		time = gameObject.GetComponent<Timer>();
 		time.TimerDone += StopRecord;
-		musicPath = Application.streamingAssetsPath + @"/Music/audio/Main menu-wav.wav";
+		musicPath = Application.streamingAssetsPath + @"/Music/audio/Building3wav.wav";
 	}
 
 	public void ButtonPressed() {
@@ -61,22 +61,8 @@ public class RecordAudio : MonoBehaviour {
 		source = null;
 	}
 
-	/*private string OpenFile() {
-		string location = StartCoroutine(ShowDialog());
-		return location;
-	}*/
-
 	public void CopyFile() {
-		StartCoroutine(Copy());
-
-		/*string path = Application.persistentDataPath + @"/Audio/" + GetFileName(AudioSelect) + ".wav";
-
-		if (!File.Exists(path)) {
-			FileUtil.CopyFileOrDirectory(OpenFile(), path);			
-		} else {
-			FileUtil.ReplaceFile(OpenFile(), path);
-		}*/
-		
+		StartCoroutine(Copy());		
 	}
 
 	private string GetFileName(Dropdown dropdown) {
@@ -121,7 +107,6 @@ public class RecordAudio : MonoBehaviour {
 		if (FileBrowser.Success) {
 			byte[] bytes = FileBrowserHelpers.ReadBytesFromFile(FileBrowser.Result);
 			FileBrowserHelpers.WriteBytesToFile(musicPath, bytes);
-
 		}
 	}
 }
