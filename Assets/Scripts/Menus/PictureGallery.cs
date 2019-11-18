@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using EasyMobile;
 
 public class PictureGallery : MonoBehaviour
 {

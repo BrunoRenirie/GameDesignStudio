@@ -73,6 +73,11 @@ namespace EasyMobile.Internal.NativeAPIs.Media
 
             NativeCamera.Call(NativeRecordVideoName, (int)cameraType, new AndroidMediaCollectedProxy(callback));
         }
+
+        public void TakePicture(CameraType cameraType, object v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 #endif

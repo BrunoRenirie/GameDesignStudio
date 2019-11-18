@@ -28,5 +28,6 @@ namespace EasyMobile
         /// <param name="cameraType">Camera type.</param>
         /// <param name="callback">Callback.</param>
         void RecordVideo(CameraType cameraType, Action<string, MediaResult> callback);
+        void TakePicture(CameraType cameraType, object v);
     }
 }
