@@ -61,22 +61,8 @@ public class RecordAudio : MonoBehaviour {
 		source = null;
 	}
 
-	/*private string OpenFile() {
-		string location = StartCoroutine(ShowDialog());
-		return location;
-	}*/
-
 	public void CopyFile() {
-		StartCoroutine(Copy());
-
-		/*string path = Application.persistentDataPath + @"/Audio/" + GetFileName(AudioSelect) + ".wav";
-
-		if (!File.Exists(path)) {
-			FileUtil.CopyFileOrDirectory(OpenFile(), path);			
-		} else {
-			FileUtil.ReplaceFile(OpenFile(), path);
-		}*/
-		
+		StartCoroutine(Copy());		
 	}
 
 	private string GetFileName(Dropdown dropdown) {

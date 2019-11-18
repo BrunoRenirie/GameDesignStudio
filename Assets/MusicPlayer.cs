@@ -14,14 +14,8 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	private void OnLevelWasLoaded(int level) {
-		LoadAudio(level);
-		print("lol");
+		LoadAudio(level);;
 	}
-
-	private void Update() {
-		if (Input.GetKeyDown(KeyCode.P)) background.Play();
-	}
-
 
 	private void LoadAudio(int index) {
 		switch (index) {
