@@ -19,9 +19,12 @@ public class LevelEditorUi : MonoBehaviour
 
     private int _DropdownSize = -1;
 
+    [HideInInspector] public int _CurrentTile;
+    [SerializeField] private GameObject _BlockScreen;
+
     private void Awake()
     {
-        _Instance = this;      
+        _Instance = this;
     }
 
     private void Start()
@@ -29,15 +32,14 @@ public class LevelEditorUi : MonoBehaviour
         _TileManager = TileManager._Instance;
         if (_TileManager._Tiles.Count > 0)
             UpdateDropdown();
-        else
-            Debug.Log("No tiles to place, Create a tile in the other scene to build.");
     }
 
     private void Update()
     {
         if (_TileManager._TileMapTiles.Count > 0)
-            _TileObj = _TileManager._TileMapTiles[_Dropdown.value];
-        if (_DropdownSize != _Dropdown.options.Count)
+            _TileObj = _TileManager._TileMapTiles[_CurrentTile];
+
+        if (_TileManager._Tiles.Count > 0)
             UpdateDropdown();
     }
 
@@ -66,14 +68,14 @@ public class LevelEditorUi : MonoBehaviour
 
     public void UpdateDropdown()
     {
-        _Dropdown.ClearOptions();
-        List<TMP_Dropdown.OptionData> dropDownOptions = new List<TMP_Dropdown.OptionData>();
+        //_Dropdown.ClearOptions();
+        //List<TMP_Dropdown.OptionData> dropDownOptions = new List<TMP_Dropdown.OptionData>();
 
         for (int i = 0; i < _TileManager._Tiles.Count; i++)
         {
-            TMP_Dropdown.OptionData tileDropdown = new TMP_Dropdown.OptionData();
-            tileDropdown.image = _TileManager._Tiles[i]._Image;
-            tileDropdown.text = _TileManager._Tiles[i]._Name;
+            //TMP_Dropdown.OptionData tileDropdown = new TMP_Dropdown.OptionData();
+            //tileDropdown.image = _TileManager._Tiles[i]._Image;
+            //tileDropdown.text = _TileManager._Tiles[i]._Name;
 
             Tile TileObj = new Tile();
             TileObj.sprite = _TileManager._Tiles[i]._Image;
@@ -93,17 +95,22 @@ public class LevelEditorUi : MonoBehaviour
             if (foundTile == -1)
                 _TileManager._TileMapTiles.Add(TileObj);
 
-            dropDownOptions.Add(tileDropdown);
+            //dropDownOptions.Add(tileDropdown);
         }
-        
-        _Dropdown.AddOptions(dropDownOptions);
-        _Dropdown.RefreshShownValue();
 
-        _DropdownSize = _TileManager._Tiles.Count;
+        //_Dropdown.AddOptions(dropDownOptions);
+        //_Dropdown.RefreshShownValue();
+
+        //_DropdownSize = _TileManager._Tiles.Count;
     }
 
     public void SetBackground(Sprite image)
     {
         _Background.sprite = image;
+    }
+
+    public void OpenGallery()
+    {
+        _BlockScreen.SetActive(true);
     }
 }

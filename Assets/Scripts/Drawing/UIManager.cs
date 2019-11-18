@@ -29,7 +29,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<AnimationSprites> _EnemyAnimations;
     [SerializeField] private GameObject _AnimationElements, _DrawingElements;
     private BoxCollider2D _DrawableObjectCollider;
-    [SerializeField] private BlockGallery _BlockPanel;
 
     [Header("Canvasses")]
     [SerializeField] private Canvas DrawCanvas;
@@ -215,7 +214,6 @@ public class UIManager : MonoBehaviour
 
     public void TileValueChanged()
     {
-        _CurrentTile = _TileDropdown.value;
         _SaveDrawing.ChangeSprite(0);
 
         switch (_TileManager._Tiles[_CurrentTile]._TileEnum)

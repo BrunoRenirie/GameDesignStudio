@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993c883dd5f9c0b41b50c3d3557a7d4d, type: 3}
+  m_Name: P_Hurt
+  m_EditorClassIdentifier: 
+  animationSprites:
+  - {fileID: 21300000, guid: b7eabc4c6a0b99c4e91a22f825bace65, type: 3}
+  - {fileID: 21300000, guid: 55931c9d41d6a274e926e7421cab0273, type: 3}
+  - {fileID: 21300000, guid: 186984ea34b77c04d9d6c3d9b756f6a5, type: 3}
+  - {fileID: 21300000, guid: a32085582492f2b42b210ecf951f0788, type: 3}
+  - {fileID: 21300000, guid: 2343d5e36d6d69a4283463f1deba02ed, type: 3}
+  - {fileID: 21300000, guid: 4f63fc9497540a24c9a4b3121d6669ad, type: 3}
+  animation: 4
+  dropDownName: Hurt
+  dropDownSprite: {fileID: 21300000, guid: b7eabc4c6a0b99c4e91a22f825bace65, type: 3}
+  resetSprite: {fileID: 21300000, guid: 474b2f33ebb73994d85e3f08b9d48204, type: 3}
