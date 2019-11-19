@@ -46,8 +46,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-       // PlayModeSwitcher._Instance._SwitchEditMode.AddListener(EditMode);
-        //PlayModeSwitcher._Instance._SwitchPlaymode.AddListener(PlayMode);
+        PlayModeSwitcher._Instance._SwitchEditMode.AddListener(EditMode);
+        PlayModeSwitcher._Instance._SwitchPlaymode.AddListener(PlayMode);
 
         _Rb = GetComponent<Rigidbody2D>();
         _Renderer = GetComponent<SpriteRenderer>();
@@ -55,13 +55,13 @@ public class Player : MonoBehaviour
         _Animator = GetComponent<Animator>();
         _Health = GetComponent<Health>();
 
-        //EditMode();
+        EditMode();
     }
 
     private void Update()
     {
-        //if (_EditMode)
-            //return;
+        if (_EditMode)
+            return;
 
         _Velocity.x = Input.GetAxis("Horizontal");
 
