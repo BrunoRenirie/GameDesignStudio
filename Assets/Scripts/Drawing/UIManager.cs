@@ -195,21 +195,21 @@ public class UIManager : MonoBehaviour
     Sprite CreateImage(string imageName, string ResourceName)
     {
         
-        Sprite itemBGSprite = Resources.Load<Sprite>(ResourceName);
-        Texture2D itemBGTex = itemBGSprite.texture;
-        byte[] itemBGBytes = itemBGTex.EncodeToPNG();
-        File.WriteAllBytes("assets/resources/" + imageName + ".png", itemBGBytes);
+        //Sprite itemBGSprite = Resources.Load<Sprite>(ResourceName);
+        //Texture2D itemBGTex = itemBGSprite.texture;
+        //byte[] itemBGBytes = itemBGTex.EncodeToPNG();
+        //File.WriteAllBytes("assets/resources/" + imageName + ".png", itemBGBytes);
 
-        AssetDatabase.Refresh();
-        Sprite image = Resources.Load<Sprite>(imageName);
+        //AssetDatabase.Refresh();
+        //Sprite image = Resources.Load<Sprite>(imageName);
 
-        string path = AssetDatabase.GetAssetPath(image);
-        TextureImporter A = (TextureImporter)AssetImporter.GetAtPath(path);
-        A.isReadable = true;
-        A.textureCompression = TextureImporterCompression.Uncompressed;
-        AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+        //string path = AssetDatabase.GetAssetPath(image);
+        //TextureImporter A = (TextureImporter)AssetImporter.GetAtPath(path);
+        //A.isReadable = true;
+        //A.textureCompression = TextureImporterCompression.Uncompressed;
+        //AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
 
-        return image;
+        return null;
     }
 
     public void TileValueChanged()
