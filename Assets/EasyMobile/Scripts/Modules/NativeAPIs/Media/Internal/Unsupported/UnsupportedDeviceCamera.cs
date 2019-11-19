@@ -21,5 +21,10 @@ namespace EasyMobile.Internal.NativeAPIs.Media
         {
             Debug.LogWarning(UnsupportedMessage);
         }
+
+        public void TakePicture(CameraType cameraType, object v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

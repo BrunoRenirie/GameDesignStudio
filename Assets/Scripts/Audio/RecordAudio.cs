@@ -16,7 +16,6 @@ public class RecordAudio : MonoBehaviour {
 	private string musicPath;
 
 	void Start() {
-		FileBrowser.SetDefaultFilter(".wav");
 		device = GetDevice();
 		time = gameObject.GetComponent<Timer>();
 		time.TimerDone += StopRecord;

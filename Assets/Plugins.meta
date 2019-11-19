@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Plugins.meta
+guid: c126ca2fa9fca2a42abe1dddfee7d542
+=======
 guid: 6e9c69431fa7c1e499847cbbdf3c80d2
+>>>>>>> 1d53b44d1bfb110119f31ef18b84fd1d3a581364:Assets/Scripts/Enemies/Behaviours.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
