@@ -15,7 +15,6 @@ public class PhoneCamera : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(Application.persistentDataPath);
 
         CameraPlane = gameObject;
 

@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
         {
             case TilesEnum.Block:
 
-                tile._Image = CreateImage(_TileNameInput.text, "Blank");
+                //tile._Image = CreateImage(_TileNameInput.text, "Blank");
 
                 break;
             case TilesEnum.Player:
@@ -138,7 +138,7 @@ public class UIManager : MonoBehaviour
                 break;
             case TilesEnum.Wallpaper:
 
-                tile._Image = CreateImage(_TileNameInput.text, "WallPaper");
+                //tile._Image = CreateImage(_TileNameInput.text, "WallPaper");
 
                 break;
         }
@@ -163,7 +163,6 @@ public class UIManager : MonoBehaviour
     }
     private void SetUI()
     {
-        _SaveDrawing.SetAnimationDictionary(_TileManager._Tiles[_CurrentTile]._AnimationList);
         SetTileDropdown();
         TileValueChanged();
         _SetUi = true;

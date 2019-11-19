@@ -57,16 +57,13 @@ public class SceneSwitcher : MonoBehaviour
         // Later modulair systeem voor maken
         if (!_Starting)
         {
-            if (_Dropdown.options[_Dropdown.value].text == "Level Editor")
-            {
-                _SceneSaveEvent.Invoke();
+            _SceneSaveEvent.Invoke();
+            if (_SceneLoadEvent.GetPersistentEventCount() > 0)
                 _SceneLoadEvent.Invoke();
-            }
-            else
-                _SceneSaveEvent.Invoke();
+
         }
 
-        SceneManager.LoadScene(_Dropdown.value);
+        //SceneManager.LoadScene(_Dropdown.value);
     }
 
     private IEnumerator LoadUnloadScene(int scene)
