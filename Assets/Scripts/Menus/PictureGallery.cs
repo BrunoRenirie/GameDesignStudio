@@ -59,7 +59,7 @@ public class PictureGallery : MonoBehaviour
                 _image.sprite.name = _item.Name;
 
                 _image.gameObject.transform.SetParent(PhotoHolder.transform);
-                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 225, _image.sprite.texture.height / 225);
+                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 550, _image.sprite.texture.height / 550);
 
                 _image.gameObject.SetActive(true);
 
@@ -107,7 +107,7 @@ public class PictureGallery : MonoBehaviour
                 _image.sprite.name = _item.Name;
 
                 _image.gameObject.transform.SetParent(PhotoHolder.transform);
-                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 225, _image.sprite.texture.height / 225);
+                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 550, _image.sprite.texture.height / 550);
 
                 _image.gameObject.SetActive(true);
 
@@ -124,7 +124,7 @@ public class PictureGallery : MonoBehaviour
         BigPhotoScript.gameObject.SetActive(true);
 
         BigPhotoScript.BigPhoto.sprite = _photoImage.sprite;
-        BigPhotoScript.BigPhoto.rectTransform.localScale = new Vector2(BigPhotoScript.BigPhoto.sprite.texture.width / 100, BigPhotoScript.BigPhoto.sprite.texture.height / 100);
+        BigPhotoScript.BigPhoto.rectTransform.localScale = new Vector2(BigPhotoScript.BigPhoto.sprite.texture.width / 650, BigPhotoScript.BigPhoto.sprite.texture.height / 650);
 
         SelectedPhoto = _photoImage.gameObject;
     }

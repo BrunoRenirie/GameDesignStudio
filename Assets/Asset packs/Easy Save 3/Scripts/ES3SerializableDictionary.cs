@@ -68,7 +68,7 @@ namespace ES3Internal
 			Remove(oldKey);
 			this [newKey] = val;
 			return true;
-		}
+        }
 	}
 
 	/*[System.Serializable]
