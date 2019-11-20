@@ -13,7 +13,8 @@ public class PlayModeSwitcher : MonoBehaviour
     [SerializeField] private Camera _EditorCam, _PlayCam;
     [SerializeField] private Canvas _BackgroundCanvas;
 
-    public Dictionary<ScriptableTile, Vector3> _EntityList;
+    public List<GameObject> _EntityList;
+    private Dictionary<GameObject, Vector3> _EntityPosList;
 
     public UnityEvent _SwitchPlaymode, _SwitchEditMode;
 
@@ -27,7 +28,7 @@ public class PlayModeSwitcher : MonoBehaviour
         _TileManager = TileManager._Instance;
         _LevelEditorManager = LevelEditorManager._Instance;
 
-        _EntityList = new Dictionary<ScriptableTile, Vector3>();
+        _EntityPosList = new Dictionary<GameObject, Vector3>();
 
         _SwitchPlaymode.AddListener(SwitchCamera);
         _SwitchEditMode.AddListener(SwitchCamera);
@@ -56,14 +57,40 @@ public class PlayModeSwitcher : MonoBehaviour
 
     void SaveEntityPos()
     {
+        if (_EntityList.Count == 0)
+            return;
 
+        for (int i = 0; i < _EntityList.Count; i++)
+        {
+            if (!_EntityPosList.ContainsKey(_EntityList[i]))
+                _EntityPosList.Add(_EntityList[i], _EntityList[i].transform.position);
+            else
+                _EntityPosList[_EntityList[i]] = _EntityList[i].transform.position;
+        }
 
+        /*
+        if (_EntityList.Count == 0)
+            return;
 
+        for (int i = 0; i < _Entities.Count; i++)
+        {
+            if (!_EntityList.ContainsKey(_Entities[i]))
+                _EntityList.Add(_Entities[i], _Entities[i].transform.position);
+            else
+                _EntityList[_Entities[i]] = _Entities[i].transform.position;
+        }
+        */
     }
 
     public void LoadEntityPos()
     {
-        foreach (KeyValuePair<ScriptableTile, Vector3> Entity in _EntityList)
+        foreach (KeyValuePair<GameObject, Vector3> Entity in _EntityPosList)
+        {
+            Entity.Key.transform.position = Entity.Value;
+        }
+
+        /*
+        foreach (KeyValuePair<GameObject, Vector3> Entity in _EntityList)
         {
             switch (Entity.Key._TileEnum)
             {
@@ -89,6 +116,7 @@ public class PlayModeSwitcher : MonoBehaviour
                     break;
             }
         }
+        */
     }
 
     void BackgroundToEdit()

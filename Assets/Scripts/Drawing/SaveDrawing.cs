@@ -36,9 +36,7 @@ public class SaveDrawing : MonoBehaviour
 
     private void Awake()
     {
-        //Define variables
-        _Instance = this;
-        
+        _Instance = this;   
     }
 
     private void Start()
@@ -67,69 +65,13 @@ public class SaveDrawing : MonoBehaviour
         }
     }
 
-    public void SetAnimationDictionary(List<AnimationSprites> animationsToDraw)
-    {
-        /*
-        _AnimationDictionary = new Dictionary<DrawableAnimations, List<Sprite>>();
-        List<AnimationSprites> animationsToDelete = new List<AnimationSprites>();
-
-        //Add to dictonary
-        for (int i = 0; i < animationsToDraw.Count; i++)
-        {
-            if (!_AnimationDictionary.ContainsKey(animationsToDraw[i].animation))
-            {
-                Debug.Log("Successfully added " + animationsToDraw[i].animation + " to the list of animations");
-                _AnimationDictionary.Add(animationsToDraw[i].animation, animationsToDraw[i].animationSprites);
-            }
-            else
-            {
-                Debug.Log("ERROR! " + animationsToDraw[i].animation + " already added to the list");
-                animationsToDelete.Add(animationsToDraw[i]);
-            }
-        }
-
-        //Delete duplicates
-        if (animationsToDraw.Count > 0)
-        {
-            for (int i = 0; i < animationsToDelete.Count; i++)
-            {
-                animationsToDraw.Remove(animationsToDelete[i]);
-            }
-        }
-
-        //Organise list
-        OrganiseList();//animationsToDraw);
-        */
-    }
-
     public void ChangedAnimation()
     {
         ChangeSprite(0);
     }
 
-    public void OrganiseList()//List<AnimationSprites> animationsToDraw)
-    {/*
-        //Organising the list
-        List<AnimationSprites> organisedList = new List<AnimationSprites>();
-        int enumCount = 0;
-        while (animationsToDraw.Count != organisedList.Count)
-        {
-            for (int i = 0; i < animationsToDraw.Count; i++)
-            {
-                if (animationsToDraw[i].animation == (DrawableAnimations)enumCount)
-                {
-                    organisedList.Add(animationsToDraw[i]);
-                    enumCount++;
-                    break;
-                }
-            }
-            yield return null;
-        }
-       
-        //Set the list
-        _TileManager._Tiles[_UIManager._CurrentTile]._AnimationList = organisedList;
-
-         */
+    public void OrganiseList()
+    {
         //Set dropdown menu
         TMP_Dropdown.OptionDataList _OptionList = new TMP_Dropdown.OptionDataList();
         for (int i = 0; i < _TileManager._Tiles[_UIManager._CurrentTile]._AnimationList.Count; i++)
@@ -179,25 +121,5 @@ public class SaveDrawing : MonoBehaviour
         string _photoTime = System.DateTime.Now.ToString("yyyyMMdd") + "-" + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString() + System.DateTime.Now.Millisecond.ToString();
 
         File.WriteAllBytes(Application.persistentDataPath + "/" + _photoTime + ".jpg", _bytes);
-    }
-
-    private void OnApplicationQuit()
-    {
-        /*
-        for (int i = 0; i < _AnimationsAdded.Count; i++)
-        {
-            for (int j = 0; j < _AnimationsAdded[i].animationSprites.Count; j++)
-            {
-                Sprite drawable_sprite = _AnimationsAdded[i].animationSprites[j];
-                Texture2D drawable_texture = drawable_sprite.texture;
-                _Clean_colours_array = new Color[(int)drawable_sprite.rect.width * (int)drawable_sprite.rect.height];
-                for (int x = 0; x < _Clean_colours_array.Length; x++)
-                    _Clean_colours_array[x] = _ResetColor;
-
-                drawable_texture.SetPixels(_Clean_colours_array);
-                drawable_texture.Apply();
-            }
-        }   
-        */
     }
 }

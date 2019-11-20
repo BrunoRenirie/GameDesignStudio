@@ -30,8 +30,9 @@ public class BlockItem : MonoBehaviour
             UIManager.Instance.TileValueChanged();
         }
         else if(LevelEditorUi._Instance != null)
-        {
+        { 
             LevelEditorUi._Instance._CurrentTile = _BlockNumber;
+
         }
 
         //CloseScreen();
