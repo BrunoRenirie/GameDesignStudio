@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour {
 			path + @"/music.wav"
 		};
 
-		Init();
+		//Init();
 	}
 
 	private void PlayAudio(PlayerState state) {
