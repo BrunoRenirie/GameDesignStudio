@@ -18,9 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Editor.unity
     guid: f28ff13554524344a8f0901afef7c997
   - enabled: 1
-    path: Assets/Scenes/Record Audio.unity
-    guid: d2508e495a9ce1744a813463f9c54b14
+    path: Assets/Scenes/Play Scene.unity
+    guid: c4fd48e305202f949a620187637a6a74
   - enabled: 1
-    path: Assets/Scenes/Pauze.unity
-    guid: 881e7a7988535b6418870186fc09b9ec
+    path: Assets/Scenes/audio test.unity
+    guid: fb1def3597f40aa4ebe1ea385b7c248f
   m_configObjects: {}
