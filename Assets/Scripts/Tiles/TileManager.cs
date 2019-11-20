@@ -13,6 +13,8 @@ public class TileManager : MonoBehaviour
 
     public GameObject PlayerPrefab, EnemyPrefab;
 
+    public List<ScriptableTile> _CustomObjects;
+
     private void Awake()
     {
         if (_Instance == null)
@@ -22,6 +24,8 @@ public class TileManager : MonoBehaviour
             
         _Tiles = new List<ScriptableTile>();
         _TileMapTiles = new List<Tile>();
+
+        _Tiles.AddRange(_CustomObjects);
     }
 
     public void SaveTiles()
