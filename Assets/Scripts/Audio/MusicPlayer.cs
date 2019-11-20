@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MusicPlayer : MonoBehaviour {
@@ -38,7 +39,7 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	private void Play(AudioSource source, string location, AudioType type) {
-		source.clip = ES3.LoadAudio("jar:file://" + Application.dataPath + "!/assets/StreamingAssets/" + location, type);
+		source.clip = ES3.LoadAudio(Path.Combine("jar:file://" + Application.streamingAssetsPath + location), type);
 		source.volume = 0.1f;
 		source.Play();
 	}
