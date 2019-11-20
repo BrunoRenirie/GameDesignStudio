@@ -40,11 +40,10 @@ public class LevelEditorManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            switch (_TileManager._Tiles[_EditorUi._Dropdown.value]._TileEnum)
+            switch (_TileManager._Tiles[_EditorUi._CurrentTile]._TileEnum)
             {
                 case TilesEnum.Block:
 
-                    _EditorUi._TileObj.name = _EditorUi._TileObj.sprite.name;
                     _EditorUi._TileObj.colliderType = Tile.ColliderType.Grid;
                     _TileMap.SetTile(TilePos, _EditorUi._TileObj);
 
@@ -60,21 +59,33 @@ public class LevelEditorManager : MonoBehaviour
                         _Player.transform.position = MousePos;
                     }
 
+                    if (!PlayModeSwitcher._Instance._EntityList.Contains(_Player))
+                    {
+                        PlayModeSwitcher._Instance._EntityList.Add(_Player);
+                    }
+
+                    /*
                     if (!PlayModeSwitcher._Instance._EntityList.ContainsKey(_TileManager._Tiles[_EditorUi._Dropdown.value]))
                     {
                         PlayModeSwitcher._Instance._EntityList.Add(_TileManager._Tiles[_EditorUi._Dropdown.value], MousePos);
                     }
-
+                    */
                     break;
                 case TilesEnum.Enemy:
 
                     GameObject enemy = Instantiate(_TileManager.EnemyPrefab, MousePos, Quaternion.identity);
 
+                    if (!PlayModeSwitcher._Instance._EntityList.Contains(enemy))
+                    {
+                        PlayModeSwitcher._Instance._EntityList.Add(enemy);
+                    }
+
+                    /*
                     if(!PlayModeSwitcher._Instance._EntityList.ContainsKey(_TileManager._Tiles[_EditorUi._Dropdown.value]))
                     {
                         PlayModeSwitcher._Instance._EntityList.Add(_TileManager._Tiles[_EditorUi._Dropdown.value], MousePos);
                     }
-
+                    */
                     break;
                 case TilesEnum.Checkpoint:
 
@@ -96,7 +107,7 @@ public class LevelEditorManager : MonoBehaviour
         _TileManager._TileMapTiles = new List<Tile>();
         _TileMap.ClearAllTiles();
 
-        _EditorUi.UpdateDropdown();
+        _EditorUi.SetTilemapTiles();
 
         foreach (KeyValuePair<Vector3, ScriptableTile> Data in LevelToLoad)
         {

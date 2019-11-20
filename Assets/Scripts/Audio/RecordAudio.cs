@@ -16,7 +16,6 @@ public class RecordAudio : MonoBehaviour {
 	private string musicPath;
 
 	void Start() {
-		FileBrowser.SetDefaultFilter(".wav");
 		device = GetDevice();
 		time = gameObject.GetComponent<Timer>();
 		time.TimerDone += StopRecord;
@@ -102,7 +101,7 @@ public class RecordAudio : MonoBehaviour {
 	}
 
 	IEnumerator Copy() {
-		yield return FileBrowser.WaitForLoadDialog(false, null, "Kies bestand", "Laad");
+		yield return FileBrowser.WaitForLoadDialog(false, @"content://com.android.externalstorage.documents/tree/primary%3A/document/primary%3APictures", "Kies bestand", "Laad");
 
 		if (FileBrowser.Success) {
 			byte[] bytes = FileBrowserHelpers.ReadBytesFromFile(FileBrowser.Result);

@@ -21,15 +21,20 @@ public class ScriptableTile : ScriptableObject
     public Vector3 _Position;
     public List<AnimationSprites> _AnimationList = new List<AnimationSprites>();
 
+    public bool _Custom;
+
     public void SaveImage()
     {
+        if (_Custom)
+            return;
+
         if (_Image != null)
             ES3.SaveImage(_Image.texture, _Name + ".png");
     }
 
     public void LoadImage()
     {
-        if (_TileEnum == TilesEnum.Player || _TileEnum == TilesEnum.Enemy)
+        if (_TileEnum == TilesEnum.Player || _TileEnum == TilesEnum.Enemy || _Custom)
             return;
 
         _Image = Resources.Load<Sprite>(_Name);

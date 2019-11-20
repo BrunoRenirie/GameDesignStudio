@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using SimpleFileBrowser;
 
 public class PictureGallery : MonoBehaviour
 {
@@ -58,7 +59,7 @@ public class PictureGallery : MonoBehaviour
                 _image.sprite.name = _item.Name;
 
                 _image.gameObject.transform.SetParent(PhotoHolder.transform);
-                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 225, _image.sprite.texture.height / 225);
+                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 550, _image.sprite.texture.height / 550);
 
                 _image.gameObject.SetActive(true);
 
@@ -106,7 +107,7 @@ public class PictureGallery : MonoBehaviour
                 _image.sprite.name = _item.Name;
 
                 _image.gameObject.transform.SetParent(PhotoHolder.transform);
-                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 225, _image.sprite.texture.height / 225);
+                _image.rectTransform.localScale = new Vector2(_image.sprite.texture.width / 550, _image.sprite.texture.height / 550);
 
                 _image.gameObject.SetActive(true);
 
@@ -123,7 +124,7 @@ public class PictureGallery : MonoBehaviour
         BigPhotoScript.gameObject.SetActive(true);
 
         BigPhotoScript.BigPhoto.sprite = _photoImage.sprite;
-        BigPhotoScript.BigPhoto.rectTransform.localScale = new Vector2(BigPhotoScript.BigPhoto.sprite.texture.width / 200, BigPhotoScript.BigPhoto.sprite.texture.height / 200);
+        BigPhotoScript.BigPhoto.rectTransform.localScale = new Vector2(BigPhotoScript.BigPhoto.sprite.texture.width / 650, BigPhotoScript.BigPhoto.sprite.texture.height / 650);
 
         SelectedPhoto = _photoImage.gameObject;
     }
@@ -158,5 +159,27 @@ public class PictureGallery : MonoBehaviour
     public void GalleryEffect()
     {
         PhotoHolderAnimator.SetTrigger("StartEnter");
+    }
+
+    /// <summary>
+    /// Import from device gallery
+    /// </summary>
+    public void ImportPicture()
+    {
+        StartCoroutine(CopyImage());
+    }
+
+    IEnumerator CopyImage()
+    {
+        yield return FileBrowser.WaitForLoadDialog(false, @"content://com.android.externalstorage.documents/tree/primary%3A/document/primary%3APictures", "Kies een foto", "Importeer");
+
+        if (FileBrowser.Success)
+        {
+            string _photoTime = System.DateTime.Now.ToString("yyyyMMdd") + "-" + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString() + System.DateTime.Now.Millisecond.ToString();
+
+            byte[] bytes = FileBrowserHelpers.ReadBytesFromFile(FileBrowser.Result);
+
+            FileBrowserHelpers.WriteBytesToFile(FileBrowserHelpers.CreateFileInDirectory(Application.persistentDataPath + "/", _photoTime + ".png"), bytes);
+        }
     }
 }
