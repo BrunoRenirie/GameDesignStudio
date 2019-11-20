@@ -38,7 +38,7 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	private void Play(AudioSource source, string location, AudioType type) {
-		source.clip = ES3.LoadAudio(Application.streamingAssetsPath + location, type);
+		source.clip = ES3.LoadAudio("jar:file://" + Application.dataPath + "!/assets/StreamingAssets/" + location, type);
 		source.volume = 0.1f;
 		source.Play();
 	}
