@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/CameraTestScene.unity
-    guid: 8bda25e6fe6e2fa43b988f59437162ae
-  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 9a2523861fd24cb4f91fa9f75cd3627d
+  - enabled: 1
+    path: Assets/Scenes/CameraTestScene.unity
+    guid: 8bda25e6fe6e2fa43b988f59437162ae
   - enabled: 1
     path: Assets/Scenes/Drawing scene.unity
     guid: 4ce4d4d4aeef2e54e97bb40827915db8
@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Editor.unity
     guid: f28ff13554524344a8f0901afef7c997
   - enabled: 1
-    path: Assets/Scenes/Play Scene.unity
-    guid: c4fd48e305202f949a620187637a6a74
+    path: Assets/Scenes/Record Audio.unity
+    guid: d2508e495a9ce1744a813463f9c54b14
   - enabled: 1
     path: Assets/Scenes/Pauze.unity
     guid: 881e7a7988535b6418870186fc09b9ec
