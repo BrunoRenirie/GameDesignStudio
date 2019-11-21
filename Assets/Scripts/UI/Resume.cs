@@ -18,8 +18,4 @@ public class Resume : MonoBehaviour
         animator.SetBool("IsOpen",  false);
     }
 
-    public void Quit()
-    {
-        SceneManager.LoadScene(0);
-    }
 }
