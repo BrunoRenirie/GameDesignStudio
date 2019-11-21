@@ -13,8 +13,8 @@ public class PlayModeSwitcher : MonoBehaviour
     [SerializeField] private Camera _EditorCam, _PlayCam;
     [SerializeField] private Canvas _BackgroundCanvas;
 
-    public List<GameObject> _EntityList;
-    private Dictionary<GameObject, Vector3> _EntityPosList;
+    public List<ObjectTileData> _EntityList;
+    public Dictionary<GameObject, Vector3> _EntityPosList;
 
     public UnityEvent _SwitchPlaymode, _SwitchEditMode;
 
@@ -62,10 +62,10 @@ public class PlayModeSwitcher : MonoBehaviour
 
         for (int i = 0; i < _EntityList.Count; i++)
         {
-            if (!_EntityPosList.ContainsKey(_EntityList[i]))
-                _EntityPosList.Add(_EntityList[i], _EntityList[i].transform.position);
+            if (!_EntityPosList.ContainsKey(_EntityList[i].gameObject))
+                _EntityPosList.Add(_EntityList[i].gameObject, _EntityList[i].transform.position);
             else
-                _EntityPosList[_EntityList[i]] = _EntityList[i].transform.position;
+                _EntityPosList[_EntityList[i].gameObject] = _EntityList[i].transform.position;
         }
 
         /*
@@ -84,9 +84,21 @@ public class PlayModeSwitcher : MonoBehaviour
 
     public void LoadEntityPos()
     {
+        Debug.Log("starting load");
         foreach (KeyValuePair<GameObject, Vector3> Entity in _EntityPosList)
         {
             Entity.Key.transform.position = Entity.Value;
+
+            /*
+            if (Entity.Key.gameObject.activeInHierarchy)
+            {
+                
+            }
+            else
+            {
+                Debug.Log("Not spawned");
+            }
+            */
         }
 
         /*

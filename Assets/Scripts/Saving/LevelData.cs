@@ -16,7 +16,7 @@ public class LevelData
         ES3.Save<Dictionary<Vector3, ScriptableTile>>("TileDictionary", _TileDict);
         ES3.Save<Dictionary<GameObject, Vector3>>("EntityList", _EntityList);
         ES3.Save<List<ScriptableTile>>("TileList", _TileList);
-        ES3.Save<List<GameObject>>("Entities", _Entities);
+        //ES3.Save<List<GameObject>>("Entities", _Entities);
     }
 
     public void Load()
