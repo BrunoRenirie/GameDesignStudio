@@ -53,39 +53,45 @@ public class LevelEditorManager : MonoBehaviour
                     if (_Player == null)
                     {
                         _Player = Instantiate(_TileManager.PlayerPrefab, MousePos, Quaternion.identity);
+
+
+                        ObjectTileData playerData = _Player.GetComponent<ObjectTileData>();
+                        if (playerData == null)
+                        {
+                            playerData = _Player.AddComponent<ObjectTileData>();
+                            playerData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
+                        }
+
+
+                        if (!PlayModeSwitcher._Instance._EntityList.Contains(playerData))
+                        {
+                            PlayModeSwitcher._Instance._EntityList.Add(playerData);
+                        }
                     }
                     else
                     {
                         _Player.transform.position = MousePos;
                     }
 
-                    if (!PlayModeSwitcher._Instance._EntityList.Contains(_Player))
-                    {
-                        PlayModeSwitcher._Instance._EntityList.Add(_Player);
-                    }
 
-                    /*
-                    if (!PlayModeSwitcher._Instance._EntityList.ContainsKey(_TileManager._Tiles[_EditorUi._Dropdown.value]))
-                    {
-                        PlayModeSwitcher._Instance._EntityList.Add(_TileManager._Tiles[_EditorUi._Dropdown.value], MousePos);
-                    }
-                    */
+
                     break;
                 case TilesEnum.Enemy:
 
                     GameObject enemy = Instantiate(_TileManager.EnemyPrefab, MousePos, Quaternion.identity);
 
-                    if (!PlayModeSwitcher._Instance._EntityList.Contains(enemy))
+                    ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
+                    if (enemyData == null)
                     {
-                        PlayModeSwitcher._Instance._EntityList.Add(enemy);
+                        enemyData = enemy.AddComponent<ObjectTileData>();
+                        enemyData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
                     }
 
-                    /*
-                    if(!PlayModeSwitcher._Instance._EntityList.ContainsKey(_TileManager._Tiles[_EditorUi._Dropdown.value]))
+                    if (!PlayModeSwitcher._Instance._EntityList.Contains(enemyData))
                     {
-                        PlayModeSwitcher._Instance._EntityList.Add(_TileManager._Tiles[_EditorUi._Dropdown.value], MousePos);
+                        PlayModeSwitcher._Instance._EntityList.Add(enemyData);
                     }
-                    */
+
                     break;
                 case TilesEnum.Checkpoint:
 
