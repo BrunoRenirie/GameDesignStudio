@@ -23,7 +23,7 @@ public class MusicPlayer : MonoBehaviour {
 				break;
 
 			case 1:
-				Play(background, @"/Music2/Building1wav.wav", AudioType.WAV);
+				Play(background, @"/Music2/Building2wav.wav", AudioType.WAV);
 				break;
 
 			case 2:
