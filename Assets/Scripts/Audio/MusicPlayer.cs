@@ -21,11 +21,11 @@ public class MusicPlayer : MonoBehaviour {
 	private void LoadAudio(int index) {
 		switch (index) {
 			case 0:
-				Play(background, @"/Music/audio/Main menu-wav.wav", AudioType.WAV);
+				Play(background, @"/Music2/Building1.mp3", AudioType.MPEG);
 				break;
 
 			case 1:
-				Play(background, @"/Music/audio/Building2wav.wav", AudioType.WAV);
+				Play(background, @"/Music2/Building1", AudioType.MPEG);
 				break;
 
 			case 2:
