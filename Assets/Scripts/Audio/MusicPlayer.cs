@@ -1,10 +1,8 @@
 ﻿using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MusicPlayer : MonoBehaviour {
 	private AudioSource background;
-	//private int index;
 
 	public GameObject notMute;
 	public GameObject mute;
@@ -21,11 +19,11 @@ public class MusicPlayer : MonoBehaviour {
 	private void LoadAudio(int index) {
 		switch (index) {
 			case 0:
-				Play(background, @"/Music2/Building1.mp3", AudioType.MPEG);
+				Play(background, @"assets/Music/audio/Main menu-wav.wav", AudioType.WAV);
 				break;
 
 			case 1:
-				Play(background, @"/Music2/Building1", AudioType.MPEG);
+				Play(background, @"/Music2/Building1wav.wav", AudioType.WAV);
 				break;
 
 			case 2:
