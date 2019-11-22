@@ -10,7 +10,7 @@ public class MenuSwitcher : MonoBehaviour
    // public int sceneIndex;
     public bool isUsed;
     public bool switcher;
-    public GameObject pauseMenuUi;
+    //public GameObject pauseMenuUi;
     bool isOpen;
     private AudioSource buttonSource;
     private Animator animator;
@@ -20,7 +20,7 @@ public class MenuSwitcher : MonoBehaviour
     {
         buttonSource =  gameObject.AddComponent<AudioSource>();
 
-        animator = pauseMenuUi.GetComponent<Animator>();
+        //animator = pauseMenuUi.GetComponent<Animator>();
         isOpen = animator.GetBool("CreditsStart");
     }
     public void Switch(int sceneIndex)
@@ -32,7 +32,7 @@ public class MenuSwitcher : MonoBehaviour
         SceneManager.LoadScene(sceneBuildIndex: sceneIndex);
      
     }
-    public void StartCredits()
+   /* public void StartCredits()
     {
         if (!isUsed)
         {
@@ -53,5 +53,5 @@ public class MenuSwitcher : MonoBehaviour
     {
         animator.SetBool("CreditsStart", isOpen);
         isUsed = false;
-    }
+    }*/
 }
