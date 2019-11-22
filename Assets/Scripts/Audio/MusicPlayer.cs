@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using System.IO;
+using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour {
 	private AudioSource background;
-	//private int index;
 
 	public GameObject notMute;
 	public GameObject mute;
@@ -20,11 +19,11 @@ public class MusicPlayer : MonoBehaviour {
 	private void LoadAudio(int index) {
 		switch (index) {
 			case 0:
-				Play(background, @"/Music/audio/Main menu-wav.wav", AudioType.WAV);
+				Play(background, @"assets/Music/audio/Main menu-wav.wav", AudioType.WAV);
 				break;
 
 			case 1:
-				Play(background, @"/Music/audio/Building2wav.wav", AudioType.WAV);
+				Play(background, @"/Music2/Building2wav.wav", AudioType.WAV);
 				break;
 
 			case 2:
@@ -38,8 +37,8 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	private void Play(AudioSource source, string location, AudioType type) {
-		source.clip = ES3.LoadAudio("jar:file://" + Application.dataPath + "!/assets/StreamingAssets/" + location, type);
-		source.volume = 0.1f;
+		source.clip = ES3.LoadAudio(Path.Combine(Application.streamingAssetsPath + location), type);
+		source.volume = 0.3f;
 		source.Play();
 	}
 

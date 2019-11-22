@@ -15,6 +15,7 @@ public class Resume : MonoBehaviour
 
     public void Doorgaan()
     {
+        Time.timeScale = 1;
         animator.SetBool("IsOpen",  false);
     }
 
