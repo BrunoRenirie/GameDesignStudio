@@ -84,51 +84,85 @@ public class PlayModeSwitcher : MonoBehaviour
 
     public void LoadEntityPos()
     {
+        List<GameObject> newEntities = new List<GameObject>();
+        List<GameObject> oldEntities = new List<GameObject>();
+        _EntityList = new List<ObjectTileData>();
+
         Debug.Log("starting load");
         foreach (KeyValuePair<GameObject, Vector3> Entity in _EntityPosList)
         {
             Entity.Key.transform.position = Entity.Value;
 
-            /*
-            if (Entity.Key.gameObject.activeInHierarchy)
+            switch (Entity.Key.tag)
             {
-                
+                case "Player":
+
+                    _LevelEditorManager._Player = Instantiate(_TileManager.PlayerPrefab, Entity.Value, Quaternion.identity);
+
+                    ObjectTileData playerData = _LevelEditorManager._Player.GetComponent<ObjectTileData>();
+                    if (playerData == null)
+                    {
+                        playerData = _LevelEditorManager._Player.AddComponent<ObjectTileData>();
+
+                        for (int i = 0; i < _TileManager._Tiles.Count; i++)
+                        {
+                            if (_TileManager._Tiles[i]._TileEnum == TilesEnum.Player)
+                                playerData._Tile = _TileManager._Tiles[i];
+                        }
+                    }
+
+                    if (!_EntityList.Contains(playerData))
+                    {
+                        _EntityList.Add(playerData);
+                    }
+
+                    newEntities.Add(_LevelEditorManager._Player);
+                    oldEntities.Add(Entity.Key);
+
+                    break;
+                case "Enemy":
+
+                    GameObject enemy = Instantiate(_TileManager.EnemyPrefab, Entity.Value, Quaternion.identity);
+
+                    ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
+                    if (enemyData == null)
+                    {
+                        enemyData = enemy.AddComponent<ObjectTileData>();
+
+                        for (int i = 0; i < _TileManager._Tiles.Count; i++)
+                        {
+                            if (_TileManager._Tiles[i]._TileEnum == TilesEnum.Enemy)
+                                enemyData._Tile = _TileManager._Tiles[i];
+                        }
+                    }
+
+                    if (!_EntityList.Contains(enemyData))
+                    {
+                        _EntityList.Add(enemyData);
+                    }
+
+                    newEntities.Add(enemy);
+                    oldEntities.Add(Entity.Key);
+
+                    break;
             }
-            else
-            {
-                Debug.Log("Not spawned");
-            }
-            */
+
         }
 
-        /*
-        foreach (KeyValuePair<GameObject, Vector3> Entity in _EntityList)
+
+        for (int i = 0; i < oldEntities.Count; i++)
         {
-            switch (Entity.Key._TileEnum)
-            {
-                case TilesEnum.Player:
-
-                    if (_LevelEditorManager._Player == null)
-                    {
-                        _LevelEditorManager._Player = Instantiate(_TileManager.PlayerPrefab, Entity.Value, Quaternion.identity);
-                    }
-                    else
-                    {
-                        _LevelEditorManager._Player.transform.position = Entity.Value;
-                    }
-
-                    break;
-                case TilesEnum.Enemy:
-
-
-
-                    break;
-                case TilesEnum.Checkpoint:
-
-                    break;
-            }
+            _EntityPosList.Remove(oldEntities[i]);
+            
+            Destroy(oldEntities[i]);
         }
-        */
+
+        for (int i = 0; i < newEntities.Count; i++)
+        {
+            _EntityPosList.Add(newEntities[i], newEntities[i].transform.position);
+        }
+
+        SaveEntityPos();
     }
 
     void BackgroundToEdit()
