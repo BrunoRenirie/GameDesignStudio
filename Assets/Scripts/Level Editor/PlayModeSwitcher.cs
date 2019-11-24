@@ -55,8 +55,10 @@ public class PlayModeSwitcher : MonoBehaviour
         _PlayCam.gameObject.SetActive(!_PlayCam.gameObject.activeSelf);
     }
 
-    void SaveEntityPos()
+    public void SaveEntityPos()
     {
+        _EntityPosList = new Dictionary<GameObject, Vector3>();
+
         if (_EntityList.Count == 0)
             return;
 
@@ -67,19 +69,6 @@ public class PlayModeSwitcher : MonoBehaviour
             else
                 _EntityPosList[_EntityList[i].gameObject] = _EntityList[i].transform.position;
         }
-
-        /*
-        if (_EntityList.Count == 0)
-            return;
-
-        for (int i = 0; i < _Entities.Count; i++)
-        {
-            if (!_EntityList.ContainsKey(_Entities[i]))
-                _EntityList.Add(_Entities[i], _Entities[i].transform.position);
-            else
-                _EntityList[_Entities[i]] = _Entities[i].transform.position;
-        }
-        */
     }
 
     public void LoadEntityPos()
@@ -172,5 +161,17 @@ public class PlayModeSwitcher : MonoBehaviour
     void BackgroundToPlay()
     {
         _BackgroundCanvas.worldCamera = _PlayCam;
+    }
+
+    public void ResetEntities()
+    {
+        for (int i = 0; i < _EntityList.Count; i++)
+        {
+            Destroy(_EntityList[i].gameObject);
+        }
+
+        _EntityList = new List<ObjectTileData>();
+
+        SaveEntityPos();
     }
 }

@@ -5,6 +5,14 @@ using TMPro;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
+
+public enum EditorTools
+{
+    Move,
+    Place,
+    Remove
+}
+
 public class LevelEditorUi : MonoBehaviour
 {
     public static LevelEditorUi _Instance;
@@ -14,13 +22,11 @@ public class LevelEditorUi : MonoBehaviour
     [SerializeField] private List<GameObject> _PlayModeUi, _EditModeUi;
     [SerializeField] private Image _Background;
 
-    [HideInInspector] public TMP_Dropdown _Dropdown;
     public Tile _TileObj;
-
-    private int _DropdownSize = -1;
+    public EditorTools _CurrentTool;
+    [SerializeField] private GameObject _SelectionBackground, _MoveTool, _EditTool, _RemoveTool, _BlockScreen, _ResetScreen;
 
     public int _CurrentTile;
-    [SerializeField] private GameObject _BlockScreen;
 
     private void Awake()
     {
@@ -90,5 +96,30 @@ public class LevelEditorUi : MonoBehaviour
     public void OpenGallery()
     {
         _BlockScreen.SetActive(true);
+    }
+    public void EnableResetScreen()
+    {
+        _ResetScreen.SetActive(!_ResetScreen.activeSelf);
+    }
+    public void MoveTool()
+    {
+        _SelectionBackground.transform.SetParent(_MoveTool.transform);
+        _SelectionBackground.transform.localPosition = new Vector3(0, 2, 0);
+
+        _CurrentTool = EditorTools.Move;
+    }
+    public void PlaceTool()
+    {
+        _SelectionBackground.transform.SetParent(_EditTool.transform);
+        _SelectionBackground.transform.localPosition = new Vector3(0, 2, 0);
+
+        _CurrentTool = EditorTools.Place;
+    }
+    public void RemoveTool()
+    {
+        _SelectionBackground.transform.SetParent(_RemoveTool.transform);
+        _SelectionBackground.transform.localPosition = new Vector3(0, 2, 0);
+
+        _CurrentTool = EditorTools.Remove;
     }
 }
