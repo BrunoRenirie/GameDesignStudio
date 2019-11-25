@@ -10,8 +10,8 @@ public class SaveManager : MonoBehaviour
     public LevelData _LevelData;
     private SceneSwitcher _SceneSwitcher;
     private TileManager _TileManager;
-    [SerializeField] private PlayModeSwitcher _PlayModeSwitcher;
-    [SerializeField] private LevelEditorManager _LevelEditorManager;
+    private PlayModeSwitcher _PlayModeSwitcher;
+    private LevelEditorManager _LevelEditorManager;
 
     private void Awake()
     {
