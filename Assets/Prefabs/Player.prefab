@@ -124,7 +124,7 @@ MonoBehaviour:
   _State: 0
   _Projectile: {fileID: 0}
   _JumpHeight: 12500
-  _MoveSpeed: 5
+  _MoveSpeed: 8
   _Velocity: {x: 0, y: 0}
 --- !u!114 &1533293033447307660
 MonoBehaviour:

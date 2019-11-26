@@ -16,9 +16,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b7eabc4c6a0b99c4e91a22f825bace65, type: 3}
   - {fileID: 21300000, guid: 55931c9d41d6a274e926e7421cab0273, type: 3}
   - {fileID: 21300000, guid: 186984ea34b77c04d9d6c3d9b756f6a5, type: 3}
-  - {fileID: 21300000, guid: a32085582492f2b42b210ecf951f0788, type: 3}
-  - {fileID: 21300000, guid: 2343d5e36d6d69a4283463f1deba02ed, type: 3}
-  - {fileID: 21300000, guid: 4f63fc9497540a24c9a4b3121d6669ad, type: 3}
   animation: 4
   dropDownName: Hurt
   dropDownSprite: {fileID: 21300000, guid: b7eabc4c6a0b99c4e91a22f825bace65, type: 3}
