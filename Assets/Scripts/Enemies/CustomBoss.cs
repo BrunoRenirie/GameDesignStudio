@@ -77,7 +77,7 @@ public class CustomBoss : MonoBehaviour
 
         if (health._Dead == true)
         {
-            Destroy(gameObject);
+            PlayModeSwitcher._Instance.OpenWinPanel();
         }
     }
     private void FixedUpdate()
@@ -146,6 +146,7 @@ public class CustomBoss : MonoBehaviour
         rb.isKinematic = true;
         rb.velocity = Vector3.zero;
         _EditMode = true;
+        health.ResetHealth();
     }
     public void PlayMode()
     {

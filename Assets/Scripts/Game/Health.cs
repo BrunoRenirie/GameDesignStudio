@@ -69,4 +69,9 @@ public class Health : MonoBehaviour
         yield return new WaitForSecondsRealtime(time);
         _Invincible = false;
     }
+
+    public void ResetHealth()
+    {
+        _hp = _maxHP;
+    }
 }
