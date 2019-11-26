@@ -36,6 +36,7 @@ public class CustomBoss : MonoBehaviour
     private GameObject player;
     private Vector2 velocity = new Vector2(-1, 0);
 
+    private bool _EditMode;
     private float updateInterval = 0.5f, chargeDuration = 4f, idleDuration = 4f;
 
     private int layerMaskSelf = ~(1 << 10);
@@ -44,16 +45,27 @@ public class CustomBoss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<Health>();
         collider = GetComponent<BoxCollider2D>();
-        player = GameObject.Find("Player");
-        playerHealth = player.GetComponent<Health>();
         health = GetComponent<Health>();
     }
     private void Start()
     {
+        PlayModeSwitcher._Instance._SwitchEditMode.AddListener(EditMode);
+        PlayModeSwitcher._Instance._SwitchPlaymode.AddListener(PlayMode);
+
+        EditMode();
         StartCoroutine(IdleState());
     }
     private void Update()
     {
+        if (Player._Instance != null)
+        {
+            player = Player._Instance.gameObject;
+            playerHealth = player.GetComponent<Health>();
+        }
+
+        if (player == null || _EditMode)
+            return;
+            
         if (CheckEdge() == false)
         {
             FlipDirection();
@@ -71,6 +83,9 @@ public class CustomBoss : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (player == null || _EditMode)
+            return;
+
         if (state == BossState.Move)
         {
             transform.Translate(velocity * movementSpeed * Time.deltaTime);
@@ -124,6 +139,18 @@ public class CustomBoss : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void EditMode()
+    {
+        rb.isKinematic = true;
+        rb.velocity = Vector3.zero;
+        _EditMode = true;
+    }
+    public void PlayMode()
+    {
+        rb.isKinematic = false;
+        _EditMode = false;
     }
 
     private IEnumerator IdleState()
