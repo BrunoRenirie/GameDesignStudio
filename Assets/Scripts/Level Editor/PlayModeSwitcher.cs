@@ -18,6 +18,8 @@ public class PlayModeSwitcher : MonoBehaviour
 
     public UnityEvent _SwitchPlaymode, _SwitchEditMode;
 
+    [SerializeField] private GameObject _WinPanel;
+
     private void Awake()
     {
         _Instance = this;
@@ -38,6 +40,8 @@ public class PlayModeSwitcher : MonoBehaviour
 
         _SwitchPlaymode.AddListener(BackgroundToPlay);
         _SwitchEditMode.AddListener(BackgroundToEdit);
+
+        _WinPanel.SetActive(false);
     }
 
     public void EnterPlayMode()
@@ -198,5 +202,15 @@ public class PlayModeSwitcher : MonoBehaviour
         _EntityList = new List<ObjectTileData>();
 
         SaveEntityPos();
+    }
+
+    public void OpenWinPanel()
+    {
+        _WinPanel.SetActive(true);
+    }
+
+    public void CloseWinPanel()
+    {
+        _WinPanel.SetActive(false);
     }
 }
