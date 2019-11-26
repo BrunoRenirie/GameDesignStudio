@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour {
 
 	void Start() {
 		path = Application.persistentDataPath + @"/Audio";
-		_player = GameObject.Find("Player").GetComponent<Player>();
+		_player = Player._Instance;
 		_player.OnStateChange += PlayAudio;
 		source = gameObject.AddComponent<AudioSource>();
 
@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour {
 			path + @"/music.wav"
 		};
 
-		Init();
+		//Init();
 	}
 
 	private void PlayAudio(PlayerState state) {

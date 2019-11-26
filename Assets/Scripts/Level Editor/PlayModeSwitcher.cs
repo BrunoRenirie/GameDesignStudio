@@ -13,7 +13,8 @@ public class PlayModeSwitcher : MonoBehaviour
     [SerializeField] private Camera _EditorCam, _PlayCam;
     [SerializeField] private Canvas _BackgroundCanvas;
 
-    public Dictionary<ScriptableTile, Vector3> _EntityList;
+    public List<ObjectTileData> _EntityList;
+    public Dictionary<GameObject, Vector3> _EntityPosList;
 
     public UnityEvent _SwitchPlaymode, _SwitchEditMode;
 
@@ -27,7 +28,7 @@ public class PlayModeSwitcher : MonoBehaviour
         _TileManager = TileManager._Instance;
         _LevelEditorManager = LevelEditorManager._Instance;
 
-        _EntityList = new Dictionary<ScriptableTile, Vector3>();
+        _EntityPosList = new Dictionary<GameObject, Vector3>();
 
         _SwitchPlaymode.AddListener(SwitchCamera);
         _SwitchEditMode.AddListener(SwitchCamera);
@@ -54,41 +55,103 @@ public class PlayModeSwitcher : MonoBehaviour
         _PlayCam.gameObject.SetActive(!_PlayCam.gameObject.activeSelf);
     }
 
-    void SaveEntityPos()
+    public void SaveEntityPos()
     {
+        _EntityPosList = new Dictionary<GameObject, Vector3>();
 
+        if (_EntityList.Count == 0)
+            return;
 
-
+        for (int i = 0; i < _EntityList.Count; i++)
+        {
+            if (!_EntityPosList.ContainsKey(_EntityList[i].gameObject))
+                _EntityPosList.Add(_EntityList[i].gameObject, _EntityList[i].transform.position);
+            else
+                _EntityPosList[_EntityList[i].gameObject] = _EntityList[i].transform.position;
+        }
     }
 
     public void LoadEntityPos()
     {
-        foreach (KeyValuePair<ScriptableTile, Vector3> Entity in _EntityList)
+        List<GameObject> newEntities = new List<GameObject>();
+        List<GameObject> oldEntities = new List<GameObject>();
+        _EntityList = new List<ObjectTileData>();
+
+        Debug.Log("starting load");
+        foreach (KeyValuePair<GameObject, Vector3> Entity in _EntityPosList)
         {
-            switch (Entity.Key._TileEnum)
+            Entity.Key.transform.position = Entity.Value;
+
+            switch (Entity.Key.tag)
             {
-                case TilesEnum.Player:
+                case "Player":
 
-                    if (_LevelEditorManager._Player == null)
+                    _LevelEditorManager._Player = Instantiate(_TileManager.PlayerPrefab, Entity.Value, Quaternion.identity);
+
+                    ObjectTileData playerData = _LevelEditorManager._Player.GetComponent<ObjectTileData>();
+                    if (playerData == null)
                     {
-                        _LevelEditorManager._Player = Instantiate(_TileManager.PlayerPrefab, Entity.Value, Quaternion.identity);
+                        playerData = _LevelEditorManager._Player.AddComponent<ObjectTileData>();
+
+                        for (int i = 0; i < _TileManager._Tiles.Count; i++)
+                        {
+                            if (_TileManager._Tiles[i]._TileEnum == TilesEnum.Player)
+                                playerData._Tile = _TileManager._Tiles[i];
+                        }
                     }
-                    else
+
+                    if (!_EntityList.Contains(playerData))
                     {
-                        _LevelEditorManager._Player.transform.position = Entity.Value;
+                        _EntityList.Add(playerData);
                     }
+
+                    newEntities.Add(_LevelEditorManager._Player);
+                    oldEntities.Add(Entity.Key);
 
                     break;
-                case TilesEnum.Enemy:
+                case "Enemy":
 
+                    GameObject enemy = Instantiate(_TileManager.EnemyPrefab, Entity.Value, Quaternion.identity);
 
+                    ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
+                    if (enemyData == null)
+                    {
+                        enemyData = enemy.AddComponent<ObjectTileData>();
 
-                    break;
-                case TilesEnum.Checkpoint:
+                        for (int i = 0; i < _TileManager._Tiles.Count; i++)
+                        {
+                            if (_TileManager._Tiles[i]._TileEnum == TilesEnum.Enemy)
+                                enemyData._Tile = _TileManager._Tiles[i];
+                        }
+                    }
+
+                    if (!_EntityList.Contains(enemyData))
+                    {
+                        _EntityList.Add(enemyData);
+                    }
+
+                    newEntities.Add(enemy);
+                    oldEntities.Add(Entity.Key);
 
                     break;
             }
+
         }
+
+
+        for (int i = 0; i < oldEntities.Count; i++)
+        {
+            _EntityPosList.Remove(oldEntities[i]);
+            
+            Destroy(oldEntities[i]);
+        }
+
+        for (int i = 0; i < newEntities.Count; i++)
+        {
+            _EntityPosList.Add(newEntities[i], newEntities[i].transform.position);
+        }
+
+        SaveEntityPos();
     }
 
     void BackgroundToEdit()
@@ -98,5 +161,17 @@ public class PlayModeSwitcher : MonoBehaviour
     void BackgroundToPlay()
     {
         _BackgroundCanvas.worldCamera = _PlayCam;
+    }
+
+    public void ResetEntities()
+    {
+        for (int i = 0; i < _EntityList.Count; i++)
+        {
+            Destroy(_EntityList[i].gameObject);
+        }
+
+        _EntityList = new List<ObjectTileData>();
+
+        SaveEntityPos();
     }
 }

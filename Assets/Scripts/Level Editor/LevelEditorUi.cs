@@ -5,6 +5,14 @@ using TMPro;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
+
+public enum EditorTools
+{
+    Move,
+    Place,
+    Remove
+}
+
 public class LevelEditorUi : MonoBehaviour
 {
     public static LevelEditorUi _Instance;
@@ -14,13 +22,11 @@ public class LevelEditorUi : MonoBehaviour
     [SerializeField] private List<GameObject> _PlayModeUi, _EditModeUi;
     [SerializeField] private Image _Background;
 
-    [HideInInspector] public TMP_Dropdown _Dropdown;
-    [HideInInspector] public Tile _TileObj;
+    public Tile _TileObj;
+    public EditorTools _CurrentTool;
+    [SerializeField] private GameObject _SelectionBackground, _MoveTool, _EditTool, _RemoveTool, _BlockScreen, _ResetScreen;
 
-    private int _DropdownSize = -1;
-
-    [HideInInspector] public int _CurrentTile;
-    [SerializeField] private GameObject _BlockScreen;
+    public int _CurrentTile;
 
     private void Awake()
     {
@@ -31,7 +37,7 @@ public class LevelEditorUi : MonoBehaviour
     {
         _TileManager = TileManager._Instance;
         if (_TileManager._Tiles.Count > 0)
-            UpdateDropdown();
+            SetTilemapTiles();
     }
 
     private void Update()
@@ -40,7 +46,7 @@ public class LevelEditorUi : MonoBehaviour
             _TileObj = _TileManager._TileMapTiles[_CurrentTile];
 
         if (_TileManager._Tiles.Count > 0)
-            UpdateDropdown();
+            SetTilemapTiles();
     }
 
     public void ToPlayMode()
@@ -66,42 +72,20 @@ public class LevelEditorUi : MonoBehaviour
         }
     }
 
-    public void UpdateDropdown()
+    public void SetTilemapTiles()
     {
-        //_Dropdown.ClearOptions();
-        //List<TMP_Dropdown.OptionData> dropDownOptions = new List<TMP_Dropdown.OptionData>();
+        _TileManager._TileMapTiles.Clear();
 
         for (int i = 0; i < _TileManager._Tiles.Count; i++)
         {
-            //TMP_Dropdown.OptionData tileDropdown = new TMP_Dropdown.OptionData();
-            //tileDropdown.image = _TileManager._Tiles[i]._Image;
-            //tileDropdown.text = _TileManager._Tiles[i]._Name;
-
             Tile TileObj = new Tile();
             TileObj.sprite = _TileManager._Tiles[i]._Image;
             TileObj.name = _TileManager._Tiles[i]._Name;
             TileObj.colliderType = Tile.ColliderType.Grid;
 
-            int foundTile = -1;
-            for (int j = 0; j < _TileManager._TileMapTiles.Count; j++)
-            {
-                if (TileObj.name == _TileManager._TileMapTiles[j].name)
-                {
-                    foundTile = j;
-                    break;
-                }
-            }
 
-            if (foundTile == -1)
-                _TileManager._TileMapTiles.Add(TileObj);
-
-            //dropDownOptions.Add(tileDropdown);
+            _TileManager._TileMapTiles.Add(TileObj);
         }
-
-        //_Dropdown.AddOptions(dropDownOptions);
-        //_Dropdown.RefreshShownValue();
-
-        //_DropdownSize = _TileManager._Tiles.Count;
     }
 
     public void SetBackground(Sprite image)
@@ -112,5 +96,30 @@ public class LevelEditorUi : MonoBehaviour
     public void OpenGallery()
     {
         _BlockScreen.SetActive(true);
+    }
+    public void EnableResetScreen()
+    {
+        _ResetScreen.SetActive(!_ResetScreen.activeSelf);
+    }
+    public void MoveTool()
+    {
+        _SelectionBackground.transform.SetParent(_MoveTool.transform);
+        _SelectionBackground.transform.localPosition = new Vector3(0, 2, 0);
+
+        _CurrentTool = EditorTools.Move;
+    }
+    public void PlaceTool()
+    {
+        _SelectionBackground.transform.SetParent(_EditTool.transform);
+        _SelectionBackground.transform.localPosition = new Vector3(0, 2, 0);
+
+        _CurrentTool = EditorTools.Place;
+    }
+    public void RemoveTool()
+    {
+        _SelectionBackground.transform.SetParent(_RemoveTool.transform);
+        _SelectionBackground.transform.localPosition = new Vector3(0, 2, 0);
+
+        _CurrentTool = EditorTools.Remove;
     }
 }
