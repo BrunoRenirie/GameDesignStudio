@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         if (_Rb.velocity.y != 0)
             _Velocity.x = Mathf.SmoothDamp(_Velocity.x, 0, ref _RefFloat, 1);
 
-        if (Input.GetKeyDown(KeyCode.Space) && _Health._Dead == false)
+        if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
         StateUpdate();
