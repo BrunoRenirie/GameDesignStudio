@@ -32,10 +32,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float _JumpHeight;
     [SerializeField] private float _MoveSpeed;
 
-    [HideInInspector] public Vector2 _Velocity;
+    public Vector2 _Velocity;
     private bool _Slowing;
     private float _RefFloat;
     private bool _Frozen, _EditMode;
+    private Vector2 originalVector;
 
     public event Action<PlayerState> OnStateChange;
 
@@ -55,20 +56,26 @@ public class Player : MonoBehaviour
         _Animator = GetComponent<Animator>();
         _Health = GetComponent<Health>();
 
+        originalVector = transform.position;
         EditMode();
     }
 
     private void Update()
     {
+        if (transform.position.y < -70f)
+        {
+            transform.position = originalVector;
+        }
+
         if (_EditMode)
             return;
 
-        _Velocity.x = Input.GetAxis("Horizontal");
+        //_Velocity.x = Input.GetAxis("Horizontal");
 
         if (_Rb.velocity.y != 0)
             _Velocity.x = Mathf.SmoothDamp(_Velocity.x, 0, ref _RefFloat, 1);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _Health._Dead == false)
             Jump();
 
         StateUpdate();
@@ -80,6 +87,7 @@ public class Player : MonoBehaviour
         }
 
         _Animator.SetInteger("State", (int)_State);
+
     }
 
     private void FixedUpdate()
@@ -92,14 +100,14 @@ public class Player : MonoBehaviour
     {
         if (_Velocity.x < 0)
         {
-            if (_State != PlayerState.moving) OnStateChange?.Invoke(_State);
+            //if (_State != PlayerState.moving) OnStateChange?.Invoke(_State);
             _Renderer.flipX = true;
             _State = PlayerState.moving;
             
         }
         else if (_Velocity.x > 0)
         {
-            if (_State != PlayerState.moving) OnStateChange?.Invoke(_State);
+            //if (_State != PlayerState.moving) OnStateChange?.Invoke(_State);
             _Renderer.flipX = false;
             _State = PlayerState.moving;
          
@@ -107,19 +115,19 @@ public class Player : MonoBehaviour
 
         if (_Rb.velocity.y > 0 && !Grounded())
         {
-            if (_State != PlayerState.jumping) OnStateChange?.Invoke(_State);
+            //if (_State != PlayerState.jumping) OnStateChange?.Invoke(_State);
             _State = PlayerState.jumping;
             
         }
         if (_Rb.velocity.y < 0 && !Grounded())
         {
-            if (_State != PlayerState.falling) OnStateChange?.Invoke(_State);
+            //if (_State != PlayerState.falling) OnStateChange?.Invoke(_State);
             _State = PlayerState.falling;
         }
 
         if (_Rb.velocity.y == 0 && _Velocity == Vector2.zero)
         {
-            if (_State != PlayerState.idle) OnStateChange?.Invoke(_State);
+            //if (_State != PlayerState.idle) OnStateChange?.Invoke(_State);
             _State = PlayerState.idle;
         }
         if (Input.GetAxisRaw("Vertical") < 0)
