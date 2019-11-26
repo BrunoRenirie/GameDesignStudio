@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
     private Health _PlayerHealth;
 
-    private void Awake()
+    private void Start()
     {
         _Renderer = GetComponent<SpriteRenderer>();
         _Rb = GetComponent<Rigidbody2D>();
@@ -88,6 +88,18 @@ public class Enemy : MonoBehaviour
     {
         _Velocity.x = _Velocity.x > 0 ? -_Velocity.x : Mathf.Abs(_Velocity.x);
         _Renderer.flipX = !_Renderer.flipX;
+
+        if (_Renderer.flipX)
+        {
+            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
+            _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
+            
+        }
+        else
+        {
+            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(1, 0));
+            _Renderer.material.SetTextureScale("_MainTex", new Vector2(-1, 1));
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -131,6 +143,7 @@ public class Enemy : MonoBehaviour
         _Rb.isKinematic = true;
         _Rb.velocity = Vector3.zero;
         _EditMode = true;
+        _Health.ResetHealth();
     }
     public void PlayMode()
     {
