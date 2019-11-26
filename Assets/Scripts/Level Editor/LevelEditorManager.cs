@@ -14,7 +14,7 @@ public class LevelEditorManager : MonoBehaviour
     private PlayModeSwitcher _PlaymodeSwitcher;
 
     private Tilemap _TileMap;
-    [HideInInspector] public GameObject _Player;
+    [HideInInspector] public GameObject _Player, _Boss;
 
     private bool _Editing = true;
 
@@ -77,7 +77,7 @@ public class LevelEditorManager : MonoBehaviour
 
                 if (_Player == null)
                 {
-                    _Player = Instantiate(_TileManager.PlayerPrefab, mousePos, Quaternion.identity);
+                    _Player = Instantiate(_TileManager._PlayerPrefab, mousePos, Quaternion.identity);
 
 
                     ObjectTileData playerData = _Player.GetComponent<ObjectTileData>();
@@ -103,7 +103,7 @@ public class LevelEditorManager : MonoBehaviour
                 break;
             case TilesEnum.Enemy:
 
-                GameObject enemy = Instantiate(_TileManager.EnemyPrefab, mousePos, Quaternion.identity);
+                GameObject enemy = Instantiate(_TileManager._EnemyPrefab, mousePos, Quaternion.identity);
 
                 ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
                 if (enemyData == null)
@@ -127,6 +127,30 @@ public class LevelEditorManager : MonoBehaviour
             case TilesEnum.Wallpaper:
 
                 _EditorUi.SetBackground(_EditorUi._TileObj.sprite);
+
+                break;
+            case TilesEnum.Boss:
+
+                if (_Boss == null)
+                {
+                    _Boss = Instantiate(_TileManager._BossPrefab, mousePos, Quaternion.identity);
+
+                    ObjectTileData bossData = _Boss.GetComponent<ObjectTileData>();
+                    if (bossData == null)
+                    {
+                        bossData = _Boss.AddComponent<ObjectTileData>();
+                        bossData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
+                    }
+
+                    if (!PlayModeSwitcher._Instance._EntityList.Contains(bossData))
+                    {
+                        PlayModeSwitcher._Instance._EntityList.Add(bossData);
+                    }
+                }
+                else
+                {
+                    _Boss.transform.position = mousePos;
+                }
 
                 break;
         }

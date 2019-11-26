@@ -86,7 +86,7 @@ public class PlayModeSwitcher : MonoBehaviour
             {
                 case "Player":
 
-                    _LevelEditorManager._Player = Instantiate(_TileManager.PlayerPrefab, Entity.Value, Quaternion.identity);
+                    _LevelEditorManager._Player = Instantiate(_TileManager._PlayerPrefab, Entity.Value, Quaternion.identity);
 
                     ObjectTileData playerData = _LevelEditorManager._Player.GetComponent<ObjectTileData>();
                     if (playerData == null)
@@ -111,7 +111,7 @@ public class PlayModeSwitcher : MonoBehaviour
                     break;
                 case "Enemy":
 
-                    GameObject enemy = Instantiate(_TileManager.EnemyPrefab, Entity.Value, Quaternion.identity);
+                    GameObject enemy = Instantiate(_TileManager._EnemyPrefab, Entity.Value, Quaternion.identity);
 
                     ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
                     if (enemyData == null)
@@ -131,6 +131,31 @@ public class PlayModeSwitcher : MonoBehaviour
                     }
 
                     newEntities.Add(enemy);
+                    oldEntities.Add(Entity.Key);
+
+                    break;
+                case "Boss":
+
+                    _LevelEditorManager._Boss = Instantiate(_TileManager._BossPrefab, Entity.Value, Quaternion.identity);
+
+                    ObjectTileData bossData = _LevelEditorManager._Boss.GetComponent<ObjectTileData>();
+                    if (bossData == null)
+                    {
+                        bossData = _LevelEditorManager._Boss.AddComponent<ObjectTileData>();
+
+                        for (int i = 0; i < _TileManager._Tiles.Count; i++)
+                        {
+                            if (_TileManager._Tiles[i]._TileEnum == TilesEnum.Boss)
+                                bossData._Tile = _TileManager._Tiles[i];
+                        }
+                    }
+
+                    if (!_EntityList.Contains(bossData))
+                    {
+                        _EntityList.Add(bossData);
+                    }
+
+                    newEntities.Add(_LevelEditorManager._Boss);
                     oldEntities.Add(Entity.Key);
 
                     break;

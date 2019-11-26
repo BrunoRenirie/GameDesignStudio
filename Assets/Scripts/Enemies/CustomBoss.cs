@@ -53,7 +53,6 @@ public class CustomBoss : MonoBehaviour
         PlayModeSwitcher._Instance._SwitchPlaymode.AddListener(PlayMode);
 
         EditMode();
-        StartCoroutine(IdleState());
     }
     private void Update()
     {
@@ -124,7 +123,8 @@ public class CustomBoss : MonoBehaviour
                     }
                     else
                     {
-                        player.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
+                        Player._Instance.Jump();
+                        //player.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 8), ForceMode2D.Impulse);
                     }
                 }
             }
@@ -151,10 +151,15 @@ public class CustomBoss : MonoBehaviour
     {
         rb.isKinematic = false;
         _EditMode = false;
+
+        StartCoroutine(IdleState());
     }
 
     private IEnumerator IdleState()
     {
+        if (_EditMode)
+            yield return null;
+
         while (true)
         {
             if (state == BossState.Idle)
@@ -176,6 +181,9 @@ public class CustomBoss : MonoBehaviour
 
     private IEnumerator MoveState()
     {
+        if (_EditMode)
+            yield return null;
+
         while (true)
         {
             if (state == BossState.Move)
@@ -239,6 +247,9 @@ public class CustomBoss : MonoBehaviour
 
     private IEnumerator AttackState()
     {
+        if (_EditMode)
+            yield return null;
+
         while (true)
         {
             if (state == BossState.Attack)
@@ -266,6 +277,9 @@ public class CustomBoss : MonoBehaviour
 
     private IEnumerator ChargeState()
     {
+        if (_EditMode)
+            yield return null;
+
         while (true)
         {
             if (state == BossState.Charge)
@@ -291,6 +305,9 @@ public class CustomBoss : MonoBehaviour
 
     private IEnumerator SpecialAttackState()
     {
+        if (_EditMode)
+            yield return null;
+
         while (true)
         {
             if (state == BossState.SpecialAttack)

@@ -646,9 +646,11 @@ MonoBehaviour:
   _Tiles: []
   _TileMapTiles: []
   _LevelName: Level
-  PlayerPrefab: {fileID: 1533293033447307655, guid: eb47fe7acf128304781716907fbd6674,
+  _PlayerPrefab: {fileID: 1533293033447307655, guid: eb47fe7acf128304781716907fbd6674,
     type: 3}
-  EnemyPrefab: {fileID: 4908381838012738618, guid: a5b81e77f1565a742a436e414a305438,
+  _EnemyPrefab: {fileID: 4908381838012738618, guid: a5b81e77f1565a742a436e414a305438,
+    type: 3}
+  _BossPrefab: {fileID: 4940606017412571976, guid: fb7b36780ceb0d148b8db2aaf861ff6d,
     type: 3}
   _CustomObjects:
   - {fileID: 11400000, guid: 9a9e0a186839fa04792db69c68197e91, type: 2}
@@ -657,6 +659,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3362343b58679c4da44a5a717869014, type: 2}
   - {fileID: 11400000, guid: cd8cf5f2cf11b2f4ea8bae0e0934ce16, type: 2}
   - {fileID: 11400000, guid: 3c0e5312f11bec8429aa2ff261d48674, type: 2}
+  - {fileID: 11400000, guid: aa108fd1ea8b1484d8cb1ee720e98967, type: 2}
 --- !u!114 &1000943541
 MonoBehaviour:
   m_ObjectHideFlags: 0
