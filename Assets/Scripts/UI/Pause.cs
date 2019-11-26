@@ -9,6 +9,7 @@ public class Pause : MonoBehaviour
 {
     private Animator animator;
     public bool spawnPanel = false;
+    private GameObject canvas;
 
     public void Paus()
     {
@@ -18,6 +19,7 @@ public class Pause : MonoBehaviour
             spawnPanel = true;
         }else
         {
+            canvas = GameObject.Find("Opties");
           animator =  GameObject.Find("PauzePanel2").GetComponent<Animator>();
           animator.SetBool("IsOpen", true);
         }

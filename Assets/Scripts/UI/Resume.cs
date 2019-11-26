@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Resume : MonoBehaviour
 {
+    public GameObject canvas;
     public GameObject pauzePanel;
     private Animator animator;
 
@@ -15,8 +16,8 @@ public class Resume : MonoBehaviour
 
     public void Doorgaan()
     {
-        Time.timeScale = 1;
         animator.SetBool("IsOpen",  false);
+        canvas.SetActive(false);
     }
 
 }
