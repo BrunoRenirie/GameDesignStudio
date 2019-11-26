@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private bool _Slowing;
     private float _RefFloat;
     private bool _Frozen, _EditMode;
+    private Vector2 originalVector;
 
     public event Action<PlayerState> OnStateChange;
 
@@ -55,11 +56,17 @@ public class Player : MonoBehaviour
         _Animator = GetComponent<Animator>();
         _Health = GetComponent<Health>();
 
+        originalVector = transform.position;
         EditMode();
     }
 
     private void Update()
     {
+        if (transform.position.y < -70f)
+        {
+            transform.position = originalVector;
+        }
+
         if (_EditMode)
             return;
 
@@ -68,7 +75,7 @@ public class Player : MonoBehaviour
         if (_Rb.velocity.y != 0)
             _Velocity.x = Mathf.SmoothDamp(_Velocity.x, 0, ref _RefFloat, 1);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _Health._Dead == false)
             Jump();
 
         StateUpdate();
@@ -80,6 +87,7 @@ public class Player : MonoBehaviour
         }
 
         _Animator.SetInteger("State", (int)_State);
+
     }
 
     private void FixedUpdate()
