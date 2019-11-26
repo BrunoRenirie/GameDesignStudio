@@ -102,6 +102,8 @@ public class Player : MonoBehaviour
         {
             //if (_State != PlayerState.moving) OnStateChange?.Invoke(_State);
             _Renderer.flipX = true;
+            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(1, 0));
+            _Renderer.material.SetTextureScale("_MainTex", new Vector2(-1, 1));
             _State = PlayerState.moving;
             
         }
@@ -109,6 +111,8 @@ public class Player : MonoBehaviour
         {
             //if (_State != PlayerState.moving) OnStateChange?.Invoke(_State);
             _Renderer.flipX = false;
+            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
+            _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
             _State = PlayerState.moving;
          
         }
@@ -167,14 +171,14 @@ public class Player : MonoBehaviour
         Projectile script = projectile.GetComponent<Projectile>();
         if (_Renderer.flipX) //Right
         {
-            projectile.transform.position = transform.position + new Vector3(_Collider.size.x / 2, 0, 0);
-            Vector3 velocity = new Vector3(1, _Rb.velocity.normalized.y * .5f, 0);
+            projectile.transform.position = transform.position - new Vector3(_Collider.size.x / 2, 0, 0);
+            Vector3 velocity = new Vector3(-1, _Rb.velocity.normalized.y * .5f, 0);
             script.Init(velocity, _Renderer.flipX);
         }
         else // Left
         {
-            projectile.transform.position = transform.position - new Vector3(_Collider.size.x / 2, 0, 0);
-            Vector3 velocity = new Vector3(-1, _Rb.velocity.normalized.y * .5f, 0);
+            projectile.transform.position = transform.position + new Vector3(_Collider.size.x / 2, 0, 0);
+            Vector3 velocity = new Vector3(1, _Rb.velocity.normalized.y * .5f, 0);
             script.Init(velocity, _Renderer.flipX);
         }
         
@@ -193,6 +197,7 @@ public class Player : MonoBehaviour
         _Rb.isKinematic = true;
         _Rb.velocity = Vector3.zero;
         _EditMode = true;
+        _Health.ResetHealth();
     }
     public void PlayMode()
     {
