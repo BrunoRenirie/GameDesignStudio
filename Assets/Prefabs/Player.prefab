@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 774959362f73851458949a6908369f8a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   _State: 0
   _Projectile: {fileID: 0}
   _JumpHeight: 12500
-  _MoveSpeed: 5
+  _MoveSpeed: 8
   _Velocity: {x: 0, y: 0}
 --- !u!114 &1533293033447307660
 MonoBehaviour:
