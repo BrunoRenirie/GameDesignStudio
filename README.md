@@ -1,1 +1,1 @@
-# gay desing studoi
+# Game Desing Studio
