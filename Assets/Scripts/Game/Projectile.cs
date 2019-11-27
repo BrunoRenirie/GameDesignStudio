@@ -36,6 +36,8 @@ public class Projectile : MonoBehaviour
     {
         _Anim = GetComponent<Animator>();
         _Renderer = GetComponent<SpriteRenderer>();
+
+        StartCoroutine(DestroyGameobject());
     }
     private void Update()
     {
@@ -69,5 +71,11 @@ public class Projectile : MonoBehaviour
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyGameobject()
+    {
+        yield return new WaitForSeconds(10);
+        Destroy();
     }
 }
