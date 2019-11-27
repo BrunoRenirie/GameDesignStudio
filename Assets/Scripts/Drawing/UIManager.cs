@@ -28,9 +28,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<AnimationSprites> _PlayerAnimations;
     [SerializeField] private List<AnimationSprites> _EnemyAnimations;
     [SerializeField] private GameObject _AnimationElements, _DrawingElements;
-    private SpriteRenderer _Renderer;
-    [SerializeField] private Material _DefaultMaterial, _GreenscreenMaterial;
     private BoxCollider2D _DrawableObjectCollider;
+    private SpriteRenderer _DrawableRenderer;
+    [SerializeField] private Material _RegularMaterial, _GreenScreenMaterial;
 
     [Header("Canvasses")]
     [SerializeField] private Canvas DrawCanvas;
@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
     private Animator _TileGenerationAnimator;
     private Animator _MarkerHolderAnimator;
     private Animator _TileGenBackgroundAnimator;
-
+    
     private bool _SetUi;
 
     private void Awake()
@@ -70,9 +70,9 @@ public class UIManager : MonoBehaviour
         _TileGenBackgroundAnimator = _TileGenBackground.GetComponent<Animator>();
 
         _DrawableObjectCollider = GameObject.FindGameObjectWithTag("Drawable").GetComponent<BoxCollider2D>();
-        _Renderer = _DrawableObjectCollider.GetComponent<SpriteRenderer>();
 
         _Cam = Camera.main;
+        _DrawableRenderer = _DrawableObjectCollider.transform.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -221,59 +221,40 @@ public class UIManager : MonoBehaviour
         switch (_TileManager._Tiles[_CurrentTile]._TileEnum)
         {
             case TilesEnum.Block:
-                _Renderer.material = _DefaultMaterial;
                 _DrawableObjectCollider.size = new Vector2(3, 3);
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(2));
-
-                _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
-                _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
                 break;
             case TilesEnum.Player:
-                _Renderer.material = _GreenscreenMaterial;
                 _DrawableObjectCollider.size = new Vector2(3, 3);
+                _DrawableRenderer.material = _GreenScreenMaterial;
+                
                 _SaveDrawing.OrganiseList();
                 StartCoroutine(LerpCamSize(2));
-
-                _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
-                _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
                 break;
             case TilesEnum.Enemy:
-                _Renderer.material = _GreenscreenMaterial;
                 _DrawableObjectCollider.size = new Vector2(3, 3);
                 _SaveDrawing.OrganiseList();
                 StartCoroutine(LerpCamSize(2));
-
-                _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
-                _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
                 break;
             case TilesEnum.Checkpoint:
-                _Renderer.material = _DefaultMaterial;
                 _DrawableObjectCollider.size = new Vector2(3, 3);
-
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(2));
-
-                _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
-                _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
                 break;
             case TilesEnum.Finish:
-                _Renderer.material = _DefaultMaterial;
                 _DrawableObjectCollider.size = new Vector2(3, 3);
-
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(2));
-
-                _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
-                _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
                 break;
             case TilesEnum.Wallpaper:
-                _Renderer.material = _DefaultMaterial;
                 _DrawableObjectCollider.size = new Vector2(19.20f, 10.80f);
-
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(8));
-
-                _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
-                _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
                 break; 
         }
+
+        
     }
 
     public void SwitchTileScreen()
