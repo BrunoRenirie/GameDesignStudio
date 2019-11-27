@@ -4220,8 +4220,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 34832fbc86ae0df419da939f4b032858, type: 2}
   _AnimationElements: {fileID: 1666324821}
   _DrawingElements: {fileID: 2082456607}
-  _DefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  _GreenscreenMaterial: {fileID: 2100000, guid: 774959362f73851458949a6908369f8a,
+  _RegularMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  _GreenScreenMaterial: {fileID: 2100000, guid: 774959362f73851458949a6908369f8a,
     type: 2}
   DrawCanvas: {fileID: 0}
   GalleryCanvas: {fileID: 893043154}
