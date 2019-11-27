@@ -9,6 +9,8 @@ public class MusicPlayer : MonoBehaviour {
 	
 	void Start() {
 		background = gameObject.AddComponent<AudioSource>();
+		background.volume = 0.3f;
+		background.loop = true;
 		LoadAudio(0);
 	}
 
@@ -19,7 +21,7 @@ public class MusicPlayer : MonoBehaviour {
 	private void LoadAudio(int index) {
 		switch (index) {
 			case 0:
-				Play(background, @"assets/Music/audio/Main menu-wav.wav", AudioType.WAV);
+				Play(background, @"/Music/audio/Main menu-wav.wav", AudioType.WAV);
 				break;
 
 			case 1:
@@ -38,7 +40,6 @@ public class MusicPlayer : MonoBehaviour {
 
 	private void Play(AudioSource source, string location, AudioType type) {
 		source.clip = ES3.LoadAudio(Path.Combine(Application.streamingAssetsPath + location), type);
-		source.volume = 0.3f;
 		source.Play();
 	}
 
