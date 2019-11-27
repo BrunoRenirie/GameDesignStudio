@@ -16,9 +16,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5f3ad666d95d31b4ab6763131ca12578, type: 3}
   - {fileID: 21300000, guid: 058e8954a1d476a4ebb410b2defe2ae7, type: 3}
   - {fileID: 21300000, guid: 1c7f7ab578973eb4289e1a7d269fc480, type: 3}
-  - {fileID: 21300000, guid: 5a761616ea15a604b996eff3c51cd3a4, type: 3}
-  - {fileID: 21300000, guid: f36d56080ff050e42a73e52fd4a341af, type: 3}
-  - {fileID: 21300000, guid: 271db1fde78e6264b95fdf399b9571de, type: 3}
   animation: 2
   dropDownName: Jumping
   dropDownSprite: {fileID: 21300000, guid: ee2a1454e600c184e91d16c9c0a66fa3, type: 3}

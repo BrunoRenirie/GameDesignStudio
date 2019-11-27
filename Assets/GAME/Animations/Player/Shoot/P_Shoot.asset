@@ -16,9 +16,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dcd38b905b293a74fba91e35141ce2e1, type: 3}
   - {fileID: 21300000, guid: 71683210e7be3b245913f055722754bf, type: 3}
   - {fileID: 21300000, guid: 4e46b382d9e3a2b49b9358d7885a9f41, type: 3}
-  - {fileID: 21300000, guid: 8a0f5fda6139a2041a8b785166afa48b, type: 3}
-  - {fileID: 21300000, guid: b115bb094c3cb564d8ae3a2980717532, type: 3}
-  - {fileID: 21300000, guid: e3e30104ffaf5b243bf31f471a9a16bc, type: 3}
   animation: 3
   dropDownName: Shoot
   dropDownSprite: {fileID: 21300000, guid: dcd38b905b293a74fba91e35141ce2e1, type: 3}
