@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -71,6 +72,10 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	private void PlaySound(int index) {
+		if (!File.Exists(paths[index])) {
+			return;
+		}
+
 		source.clip = ES3.LoadAudio(paths[index], AudioType.WAV);
 		source.Play();
 	}
