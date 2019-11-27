@@ -21,7 +21,10 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         if (_Player == null)
-            _Player = Player._Instance; //GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        {
+            _Player = Player._Instance;
+            return;
+        }
 
         if (_LeftMoveButton.buttonPressed)
         {

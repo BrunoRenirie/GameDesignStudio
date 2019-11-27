@@ -11,9 +11,10 @@ public class LevelEditorManager : MonoBehaviour
     public static LevelEditorManager _Instance;
     private LevelEditorUi _EditorUi;
     private TileManager _TileManager;
+    private PlayModeSwitcher _PlaymodeSwitcher;
 
     private Tilemap _TileMap;
-    [HideInInspector] public GameObject _Player;
+    [HideInInspector] public GameObject _Player, _Boss;
 
     private bool _Editing = true;
 
@@ -26,6 +27,8 @@ public class LevelEditorManager : MonoBehaviour
     {
         _TileManager = TileManager._Instance;
         _EditorUi = LevelEditorUi._Instance;
+        _PlaymodeSwitcher = PlayModeSwitcher._Instance;
+
         _TileMap = GetComponent<Tilemap>();
     }
 
@@ -36,74 +39,142 @@ public class LevelEditorManager : MonoBehaviour
 
         Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         MousePos.z = 0;
-        Vector3Int TilePos = _TileMap.WorldToCell(MousePos);
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            switch (_TileManager._Tiles[_EditorUi._CurrentTile]._TileEnum)
+            switch (_EditorUi._CurrentTool)
             {
-                case TilesEnum.Block:
-
-                    _EditorUi._TileObj.colliderType = Tile.ColliderType.Grid;
-                    _TileMap.SetTile(TilePos, _EditorUi._TileObj);
-
+                case EditorTools.Move:
+                    MoveUpdate();
                     break;
-                case TilesEnum.Player:
-
-                    if (_Player == null)
-                    {
-                        _Player = Instantiate(_TileManager.PlayerPrefab, MousePos, Quaternion.identity);
-
-
-                        ObjectTileData playerData = _Player.GetComponent<ObjectTileData>();
-                        if (playerData == null)
-                        {
-                            playerData = _Player.AddComponent<ObjectTileData>();
-                            playerData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
-                        }
-
-
-                        if (!PlayModeSwitcher._Instance._EntityList.Contains(playerData))
-                        {
-                            PlayModeSwitcher._Instance._EntityList.Add(playerData);
-                        }
-                    }
-                    else
-                    {
-                        _Player.transform.position = MousePos;
-                    }
-
-
-
+                case EditorTools.Place:
+                    PlaceUpdate(MousePos);
                     break;
-                case TilesEnum.Enemy:
+                case EditorTools.Remove:
+                    RemoveUpdate(MousePos);
+                    break;
+            }
+        }
+    }
 
-                    GameObject enemy = Instantiate(_TileManager.EnemyPrefab, MousePos, Quaternion.identity);
+    public void MoveUpdate()
+    {
 
-                    ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
-                    if (enemyData == null)
+    }
+    public void PlaceUpdate(Vector3 mousePos)
+    {
+        Vector3Int TilePos = _TileMap.WorldToCell(mousePos);
+
+        switch (_TileManager._Tiles[_EditorUi._CurrentTile]._TileEnum)
+        {
+            case TilesEnum.Block:
+
+                _EditorUi._TileObj.colliderType = Tile.ColliderType.Grid;
+                _TileMap.SetTile(TilePos, _EditorUi._TileObj);
+
+                break;
+            case TilesEnum.Player:
+
+                if (_Player == null)
+                {
+                    _Player = Instantiate(_TileManager._PlayerPrefab, mousePos, Quaternion.identity);
+
+
+                    ObjectTileData playerData = _Player.GetComponent<ObjectTileData>();
+                    if (playerData == null)
                     {
-                        enemyData = enemy.AddComponent<ObjectTileData>();
-                        enemyData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
+                        playerData = _Player.AddComponent<ObjectTileData>();
+                        playerData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
                     }
 
-                    if (!PlayModeSwitcher._Instance._EntityList.Contains(enemyData))
+
+                    if (!PlayModeSwitcher._Instance._EntityList.Contains(playerData))
                     {
-                        PlayModeSwitcher._Instance._EntityList.Add(enemyData);
+                        PlayModeSwitcher._Instance._EntityList.Add(playerData);
+                    }
+                }
+                else
+                {
+                    _Player.transform.position = mousePos;
+                }
+
+
+
+                break;
+            case TilesEnum.Enemy:
+
+                GameObject enemy = Instantiate(_TileManager._EnemyPrefab, mousePos, Quaternion.identity);
+
+                ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
+                if (enemyData == null)
+                {
+                    enemyData = enemy.AddComponent<ObjectTileData>();
+                    enemyData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
+                }
+
+                if (!PlayModeSwitcher._Instance._EntityList.Contains(enemyData))
+                {
+                    PlayModeSwitcher._Instance._EntityList.Add(enemyData);
+                }
+
+                break;
+            case TilesEnum.Checkpoint:
+
+                break;
+            case TilesEnum.Finish:
+
+                break;
+            case TilesEnum.Wallpaper:
+
+                _EditorUi.SetBackground(_EditorUi._TileObj.sprite);
+
+                break;
+            case TilesEnum.Boss:
+
+                if (_Boss == null)
+                {
+                    _Boss = Instantiate(_TileManager._BossPrefab, mousePos, Quaternion.identity);
+
+                    ObjectTileData bossData = _Boss.GetComponent<ObjectTileData>();
+                    if (bossData == null)
+                    {
+                        bossData = _Boss.AddComponent<ObjectTileData>();
+                        bossData._Tile = _TileManager._Tiles[_EditorUi._CurrentTile];
                     }
 
-                    break;
-                case TilesEnum.Checkpoint:
+                    if (!PlayModeSwitcher._Instance._EntityList.Contains(bossData))
+                    {
+                        PlayModeSwitcher._Instance._EntityList.Add(bossData);
+                    }
+                }
+                else
+                {
+                    _Boss.transform.position = mousePos;
+                }
 
-                    break;
-                case TilesEnum.Finish:
+                break;
+        }
+    }
 
-                    break;
-                case TilesEnum.Wallpaper:
-                    
-                    _EditorUi.SetBackground(_EditorUi._TileObj.sprite);
+    public void RemoveUpdate(Vector3 mousePos)
+    {
+        Vector3Int TilePos = _TileMap.WorldToCell(mousePos);
+        TileBase tile = _TileMap.GetTile(TilePos);
+        if(tile != null)
+        {
+            _TileMap.SetTile(TilePos, null);
+        }
+        else 
+        {
+            RaycastHit2D ray = Physics2D.Raycast(mousePos, Vector3.forward);
+            ObjectTileData data = ray.transform.GetComponent<ObjectTileData>();
+            if (data != null)
+            {
+                _PlaymodeSwitcher._EntityList.Remove(data);
+                Destroy(data.gameObject);
 
-                    break;
+                _PlaymodeSwitcher.SaveEntityPos();
+                SaveManager._Instance.SaveLevel();
             }
         }
     }
@@ -151,7 +222,6 @@ public class LevelEditorManager : MonoBehaviour
                 _TileMap.SetTile(new Vector3Int((int)Data.Key.x, (int)Data.Key.y, (int)Data.Key.z), _TileManager._TileMapTiles[foundTile]);
             else
             {
-                //_TileManager._TileMapTiles.Add(obj);
                 _TileMap.SetTile(new Vector3Int((int)Data.Key.x, (int)Data.Key.y, (int)Data.Key.z), obj);//_TileManager._TileMapTiles[_TileManager._TileMapTiles.Count - 1]);
             }     
         }

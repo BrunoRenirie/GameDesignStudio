@@ -11,7 +11,7 @@ public class TileManager : MonoBehaviour
     public List<Tile> _TileMapTiles = new List<Tile>();
     public string _LevelName = "Level";
 
-    public GameObject PlayerPrefab, EnemyPrefab;
+    public GameObject _PlayerPrefab, _EnemyPrefab, _BossPrefab;
 
     public List<ScriptableTile> _CustomObjects;
 

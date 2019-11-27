@@ -10,8 +10,8 @@ public class SaveManager : MonoBehaviour
     public LevelData _LevelData;
     private SceneSwitcher _SceneSwitcher;
     private TileManager _TileManager;
-    [SerializeField] private PlayModeSwitcher _PlayModeSwitcher;
-    [SerializeField] private LevelEditorManager _LevelEditorManager;
+    private PlayModeSwitcher _PlayModeSwitcher;
+    private LevelEditorManager _LevelEditorManager;
 
     private void Awake()
     {
@@ -106,6 +106,7 @@ public class SaveManager : MonoBehaviour
         //Playmode Data
         if (_LevelData._EntityList.Count > 0)
         {
+            Debug.Log("ye");
             _PlayModeSwitcher._EntityPosList = _LevelData._EntityList;
             _PlayModeSwitcher.LoadEntityPos();
         }
