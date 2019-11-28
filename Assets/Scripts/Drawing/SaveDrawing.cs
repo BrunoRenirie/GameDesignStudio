@@ -24,7 +24,7 @@ public class SaveDrawing : MonoBehaviour
     private Dictionary<DrawableAnimations, List<Sprite>> _AnimationDictionary;
     private UIManager _UIManager;
     private TileManager _TileManager;
-    [SerializeField] private SpriteRenderer _SpriteRenderer;
+    public SpriteRenderer _SpriteRenderer;
     private Drawable _Drawable;
     private Color[] _Clean_colours_array;
     private Color _ResetColor = new Color(0, 0, 0, 0);
