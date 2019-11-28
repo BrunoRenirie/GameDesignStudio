@@ -171,7 +171,7 @@ public class PictureGallery : MonoBehaviour
 
     IEnumerator CopyImage()
     {
-        yield return FileBrowser.WaitForLoadDialog(false, @"content://com.android.externalstorage.documents/tree/primary%3A/document/primary%3APictures", "Kies een foto", "Importeer");
+        yield return FileBrowser.WaitForLoadDialog(false, @"content://com.android.externalstorage.documents/tree/primary%3A/document/primary%3APictures", "Dubbelklik om te importeren", "Importeer");
 
         if (FileBrowser.Success)
         {
@@ -180,6 +180,14 @@ public class PictureGallery : MonoBehaviour
             byte[] bytes = FileBrowserHelpers.ReadBytesFromFile(FileBrowser.Result);
 
             FileBrowserHelpers.WriteBytesToFile(FileBrowserHelpers.CreateFileInDirectory(Application.persistentDataPath + "/", _photoTime + ".png"), bytes);
+
+            //Texture2D tex = new Texture2D(16, 16, TextureFormat.PVRTC_RGBA4, false);
+            //tex.LoadRawTextureData(bytes);
+
+            //BigPhotoScript.BigPhoto.sprite
+            //UsePhoto();
+
+            SaveDrawing._Instance._SpriteRenderer.sprite.texture.LoadImage(bytes);
         }
     }
 }
