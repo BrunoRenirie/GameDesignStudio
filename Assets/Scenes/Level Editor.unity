@@ -3902,6 +3902,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 222328823}
     m_Modifications:
+    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1659108644}
+    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CloseBlockPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 368771581601937483, guid: 310e780b089eac449bb40f9ac5376ef9,
         type: 3}
       propertyPath: m_Name
@@ -4011,36 +4041,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1659108644}
-    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CloseBlockPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 368771580968740968, guid: 310e780b089eac449bb40f9ac5376ef9,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 368771582079303300, guid: 310e780b089eac449bb40f9ac5376ef9,
         type: 3}
@@ -9295,16 +9295,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4077920348023400078, guid: d882f4ec5956e4d448972f46c2c0e622,
-        type: 3}
-      propertyPath: m_Name
-      value: Editor Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 4077920348023400078, guid: d882f4ec5956e4d448972f46c2c0e622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4077920348023400076, guid: d882f4ec5956e4d448972f46c2c0e622,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -9314,6 +9304,16 @@ PrefabInstance:
         type: 3}
       propertyPath: orthographic size
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077920348023400078, guid: d882f4ec5956e4d448972f46c2c0e622,
+        type: 3}
+      propertyPath: m_Name
+      value: Editor Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077920348023400078, guid: d882f4ec5956e4d448972f46c2c0e622,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4077920348023400077, guid: d882f4ec5956e4d448972f46c2c0e622,
         type: 3}
