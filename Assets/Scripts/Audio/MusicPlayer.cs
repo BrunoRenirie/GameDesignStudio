@@ -6,6 +6,8 @@ public class MusicPlayer : MonoBehaviour {
 
 	public GameObject notMute;
 	public GameObject mute;
+
+	private AudioSource muziek;
 	
 	void Start() {
 		background = gameObject.AddComponent<AudioSource>();
@@ -47,5 +49,12 @@ public class MusicPlayer : MonoBehaviour {
 		mute.SetActive(!mute.active);
 		notMute.SetActive(!notMute.active);
 		background.mute = !background.mute;
+	}
+
+	public void TempMute() {
+		mute.SetActive(!mute.active);
+		notMute.SetActive(!notMute.active);
+		muziek = GameObject.Find("Muziek").GetComponent<AudioSource>();
+		muziek.mute = !muziek.mute;
 	}
 }
