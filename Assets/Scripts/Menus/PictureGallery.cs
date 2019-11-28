@@ -124,7 +124,7 @@ public class PictureGallery : MonoBehaviour
         BigPhotoScript.gameObject.SetActive(true);
 
         BigPhotoScript.BigPhoto.sprite = _photoImage.sprite;
-        BigPhotoScript.BigPhoto.rectTransform.localScale = new Vector2(BigPhotoScript.BigPhoto.sprite.texture.width / 650, BigPhotoScript.BigPhoto.sprite.texture.height / 650);
+        BigPhotoScript.BigPhoto.rectTransform.localScale = new Vector2(BigPhotoScript.BigPhoto.sprite.texture.width / 400, BigPhotoScript.BigPhoto.sprite.texture.height / 400);
 
         SelectedPhoto = _photoImage.gameObject;
     }
