@@ -4,12 +4,8 @@ using UnityEngine.Networking;
 
 public class AudioManager : MonoBehaviour {
 	private Player _player;
-	private string[] paths;
-	private AudioClip clip;
-	private AudioClip musicTrack;
 	private AudioSource source;
-	private GameObject musicObject;
-	private AudioSource music;
+	private string[] paths;
 	private string path;
 
 
@@ -31,8 +27,6 @@ public class AudioManager : MonoBehaviour {
 			path + @"/second.wav",
 			path + @"/music.wav"
 		};
-
-		//Init();
 	}
 
 	private void PlayAudio(PlayerState state) {
@@ -77,12 +71,11 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	private void PlaySound(int index) {
-		//StartCoroutine(GetAudioClip(paths[index]));
 		source.clip = ES3.LoadAudio(paths[index], AudioType.WAV);
 		source.Play();
 	}
 
-	IEnumerator GetAudioClip(string location) {
+	/*IEnumerator GetAudioClip(string location) {
 		using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(location, AudioType.WAV)) {
 
 			yield return www.SendWebRequest();
@@ -95,13 +88,5 @@ public class AudioManager : MonoBehaviour {
 			}
 		}
 
-	}
-
-	private void Init() {
-		musicObject = GameObject.Find("Music");
-		music = musicObject.AddComponent<AudioSource>();
-		music.loop = true;
-		//StartCoroutine(GetAudioClip(paths[9]));
-		music.clip = ES3.LoadAudio(paths[9], AudioType.WAV); ;
-	}
+	}*/
 }

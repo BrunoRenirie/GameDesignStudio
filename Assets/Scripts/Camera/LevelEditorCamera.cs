@@ -17,6 +17,8 @@ public class LevelEditorCamera : MonoBehaviour
 
     void Update()
     {
+        return;
+
         if(_EditorUi._CurrentTool == EditorTools.Move)
         {
             if (Input.touchCount == 1)
@@ -36,6 +38,7 @@ public class LevelEditorCamera : MonoBehaviour
 
     private void FixedUpdate()
     {
+        return;
         transform.Translate(-_PosDifference);
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1b7b2c04569ce43adc808a678ad217, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  _Image: {fileID: 0}
-  _Name: 
+  _Image: {fileID: 21300000, guid: 7627465a54166e147a47593984d3b02f, type: 3}
+  _Name: Taco Boss
   _TileEnum: 6
   _Position: {x: 0, y: 0, z: 0}
   _AnimationList: []
