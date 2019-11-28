@@ -36,6 +36,8 @@ public class Projectile : MonoBehaviour
     {
         _Anim = GetComponent<Animator>();
         _Renderer = GetComponent<SpriteRenderer>();
+
+        StartCoroutine(DestroyGameobject());
     }
     private void Update()
     {
@@ -45,12 +47,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Boss"))
         {
             _State = ProjectileState.Hit;
             _Velocity = Vector3.zero;
             Health enemyHealth = other.GetComponent<Health>();
             enemyHealth.TakeDamage(_Damage, _ProjectileType, transform.position);
+            Destroy();
         }
         if (other.gameObject.layer == 11)
         {
@@ -68,5 +71,11 @@ public class Projectile : MonoBehaviour
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyGameobject()
+    {
+        yield return new WaitForSeconds(10);
+        Destroy();
     }
 }

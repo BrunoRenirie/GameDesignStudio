@@ -16,9 +16,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 51ec4b98466a09a4e82a9fcb433c2805, type: 3}
   - {fileID: 21300000, guid: 04ce8f9e112d4364290c94055049cc64, type: 3}
   - {fileID: 21300000, guid: c3a024c81d2a6b14d9b4152712aee4ee, type: 3}
-  - {fileID: 21300000, guid: 771a515ad2b58d442a52e6d5d6412114, type: 3}
-  - {fileID: 21300000, guid: 3f1b280b0c5a9d3408d24cbcb26b0c9e, type: 3}
-  - {fileID: 21300000, guid: a83c65a06891d74449f609d5afb0e993, type: 3}
   animation: 0
   dropDownName: Idle
   dropDownSprite: {fileID: 21300000, guid: ec9a318c99b0cc345b0ed28017a037a0, type: 3}

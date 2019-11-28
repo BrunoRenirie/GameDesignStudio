@@ -18,6 +18,8 @@ public class PlayModeSwitcher : MonoBehaviour
 
     public UnityEvent _SwitchPlaymode, _SwitchEditMode;
 
+    [SerializeField] private GameObject _WinPanel;
+
     private void Awake()
     {
         _Instance = this;
@@ -38,6 +40,8 @@ public class PlayModeSwitcher : MonoBehaviour
 
         _SwitchPlaymode.AddListener(BackgroundToPlay);
         _SwitchEditMode.AddListener(BackgroundToEdit);
+
+        _WinPanel.SetActive(false);
     }
 
     public void EnterPlayMode()
@@ -55,8 +59,10 @@ public class PlayModeSwitcher : MonoBehaviour
         _PlayCam.gameObject.SetActive(!_PlayCam.gameObject.activeSelf);
     }
 
-    void SaveEntityPos()
+    public void SaveEntityPos()
     {
+        _EntityPosList = new Dictionary<GameObject, Vector3>();
+
         if (_EntityList.Count == 0)
             return;
 
@@ -67,19 +73,6 @@ public class PlayModeSwitcher : MonoBehaviour
             else
                 _EntityPosList[_EntityList[i].gameObject] = _EntityList[i].transform.position;
         }
-
-        /*
-        if (_EntityList.Count == 0)
-            return;
-
-        for (int i = 0; i < _Entities.Count; i++)
-        {
-            if (!_EntityList.ContainsKey(_Entities[i]))
-                _EntityList.Add(_Entities[i], _Entities[i].transform.position);
-            else
-                _EntityList[_Entities[i]] = _Entities[i].transform.position;
-        }
-        */
     }
 
     public void LoadEntityPos()
@@ -97,7 +90,7 @@ public class PlayModeSwitcher : MonoBehaviour
             {
                 case "Player":
 
-                    _LevelEditorManager._Player = Instantiate(_TileManager.PlayerPrefab, Entity.Value, Quaternion.identity);
+                    _LevelEditorManager._Player = Instantiate(_TileManager._PlayerPrefab, Entity.Value, Quaternion.identity);
 
                     ObjectTileData playerData = _LevelEditorManager._Player.GetComponent<ObjectTileData>();
                     if (playerData == null)
@@ -122,7 +115,7 @@ public class PlayModeSwitcher : MonoBehaviour
                     break;
                 case "Enemy":
 
-                    GameObject enemy = Instantiate(_TileManager.EnemyPrefab, Entity.Value, Quaternion.identity);
+                    GameObject enemy = Instantiate(_TileManager._EnemyPrefab, Entity.Value, Quaternion.identity);
 
                     ObjectTileData enemyData = enemy.GetComponent<ObjectTileData>();
                     if (enemyData == null)
@@ -142,6 +135,31 @@ public class PlayModeSwitcher : MonoBehaviour
                     }
 
                     newEntities.Add(enemy);
+                    oldEntities.Add(Entity.Key);
+
+                    break;
+                case "Boss":
+
+                    _LevelEditorManager._Boss = Instantiate(_TileManager._BossPrefab, Entity.Value, Quaternion.identity);
+
+                    ObjectTileData bossData = _LevelEditorManager._Boss.GetComponent<ObjectTileData>();
+                    if (bossData == null)
+                    {
+                        bossData = _LevelEditorManager._Boss.AddComponent<ObjectTileData>();
+
+                        for (int i = 0; i < _TileManager._Tiles.Count; i++)
+                        {
+                            if (_TileManager._Tiles[i]._TileEnum == TilesEnum.Boss)
+                                bossData._Tile = _TileManager._Tiles[i];
+                        }
+                    }
+
+                    if (!_EntityList.Contains(bossData))
+                    {
+                        _EntityList.Add(bossData);
+                    }
+
+                    newEntities.Add(_LevelEditorManager._Boss);
                     oldEntities.Add(Entity.Key);
 
                     break;
@@ -172,5 +190,27 @@ public class PlayModeSwitcher : MonoBehaviour
     void BackgroundToPlay()
     {
         _BackgroundCanvas.worldCamera = _PlayCam;
+    }
+
+    public void ResetEntities()
+    {
+        for (int i = 0; i < _EntityList.Count; i++)
+        {
+            Destroy(_EntityList[i].gameObject);
+        }
+
+        _EntityList = new List<ObjectTileData>();
+
+        SaveEntityPos();
+    }
+
+    public void OpenWinPanel()
+    {
+        _WinPanel.SetActive(true);
+    }
+
+    public void CloseWinPanel()
+    {
+        _WinPanel.SetActive(false);
     }
 }

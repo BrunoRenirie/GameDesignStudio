@@ -7,29 +7,38 @@ public class LevelEditorCamera : MonoBehaviour
     private Camera _Cam;
     private Vector3 _StartPos, _PosDifference;
 
-    void Awake()
+    private LevelEditorUi _EditorUi;
+
+    void Start()
     {
         _Cam = GetComponent<Camera>();
+        _EditorUi = LevelEditorUi._Instance;
     }
 
     void Update()
     {
-        if (Input.touchCount == 1)
-        {
-            if (Input.GetTouch(0).phase == TouchPhase.Moved)
-            {
-                Vector3 newPos = _Cam.ScreenToWorldPoint(Input.mousePosition);
-                _PosDifference = newPos - _StartPos;
-            }
+        return;
 
-            _StartPos = _Cam.ScreenToWorldPoint(Input.mousePosition);
+        if(_EditorUi._CurrentTool == EditorTools.Move)
+        {
+            if (Input.touchCount == 1)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    Vector3 newPos = _Cam.ScreenToWorldPoint(Input.mousePosition);
+                    _PosDifference = newPos - _StartPos;
+                }
+
+                _StartPos = _Cam.ScreenToWorldPoint(Input.mousePosition);
+            }
+            else
+                _PosDifference = new Vector3();
         }
-        else
-            _PosDifference = new Vector3();
     }
 
     private void FixedUpdate()
     {
+        return;
         transform.Translate(-_PosDifference);
     }
 }

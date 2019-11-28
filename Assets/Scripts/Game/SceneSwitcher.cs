@@ -45,6 +45,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void ReturnButton()
     {
+        SwitchScene();
         SceneManager.LoadScene(0);
     }
 }

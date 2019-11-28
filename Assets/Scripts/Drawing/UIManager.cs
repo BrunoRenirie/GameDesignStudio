@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<AnimationSprites> _EnemyAnimations;
     [SerializeField] private GameObject _AnimationElements, _DrawingElements;
     private BoxCollider2D _DrawableObjectCollider;
+    private SpriteRenderer _DrawableRenderer;
+    [SerializeField] private Material _RegularMaterial, _GreenScreenMaterial;
 
     [Header("Canvasses")]
     [SerializeField] private Canvas DrawCanvas;
@@ -37,7 +39,7 @@ public class UIManager : MonoBehaviour
     private Animator _TileGenerationAnimator;
     private Animator _MarkerHolderAnimator;
     private Animator _TileGenBackgroundAnimator;
-
+    
     private bool _SetUi;
 
     private void Awake()
@@ -70,6 +72,7 @@ public class UIManager : MonoBehaviour
         _DrawableObjectCollider = GameObject.FindGameObjectWithTag("Drawable").GetComponent<BoxCollider2D>();
 
         _Cam = Camera.main;
+        _DrawableRenderer = _DrawableObjectCollider.transform.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -219,10 +222,13 @@ public class UIManager : MonoBehaviour
         {
             case TilesEnum.Block:
                 _DrawableObjectCollider.size = new Vector2(3, 3);
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(2));
                 break;
             case TilesEnum.Player:
                 _DrawableObjectCollider.size = new Vector2(3, 3);
+                _DrawableRenderer.material = _GreenScreenMaterial;
+                
                 _SaveDrawing.OrganiseList();
                 StartCoroutine(LerpCamSize(2));
                 break;
@@ -233,17 +239,17 @@ public class UIManager : MonoBehaviour
                 break;
             case TilesEnum.Checkpoint:
                 _DrawableObjectCollider.size = new Vector2(3, 3);
-
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(2));
                 break;
             case TilesEnum.Finish:
                 _DrawableObjectCollider.size = new Vector2(3, 3);
-
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(2));
                 break;
             case TilesEnum.Wallpaper:
                 _DrawableObjectCollider.size = new Vector2(19.20f, 10.80f);
-
+                _DrawableRenderer.material = _RegularMaterial;
                 StartCoroutine(LerpCamSize(8));
                 break; 
         }

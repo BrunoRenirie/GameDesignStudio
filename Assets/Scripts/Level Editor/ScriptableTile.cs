@@ -9,7 +9,8 @@ public enum TilesEnum
     Enemy,
     Checkpoint,
     Finish,
-    Wallpaper
+    Wallpaper,
+    Boss
 }
 
 [CreateAssetMenu(fileName = "Tile", menuName = "Tiles/Drawable Tile", order = 1)]
@@ -34,7 +35,7 @@ public class ScriptableTile : ScriptableObject
 
     public void LoadImage()
     {
-        if (_TileEnum == TilesEnum.Player || _TileEnum == TilesEnum.Enemy || _Custom)
+        if (_TileEnum == TilesEnum.Player || _TileEnum == TilesEnum.Enemy || _TileEnum == TilesEnum.Boss || _Custom )
             return;
 
         _Image = Resources.Load<Sprite>(_Name);
