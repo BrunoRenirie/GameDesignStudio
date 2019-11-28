@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEditor;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _MarkerHolder;
     [Space(10)]
     [SerializeField] private GameObject _TileGenBackground;
+    public Text _AnimCounter;
 
     private TMP_InputField _TileNameInput;
     private Camera _Cam;
@@ -223,6 +225,8 @@ public class UIManager : MonoBehaviour
             case TilesEnum.Block:
                 _DrawableObjectCollider.size = new Vector2(3, 3);
                 _DrawableRenderer.material = _RegularMaterial;
+
+                
                 StartCoroutine(LerpCamSize(2));
                 break;
             case TilesEnum.Player:
@@ -254,7 +258,9 @@ public class UIManager : MonoBehaviour
                 break; 
         }
 
-        
+        _DrawableRenderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
+        _DrawableRenderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
+
     }
 
     public void SwitchTileScreen()
