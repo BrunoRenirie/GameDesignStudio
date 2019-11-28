@@ -94,6 +94,7 @@ public class SaveDrawing : MonoBehaviour
         {
             _UIManager._DrawToAnimateEvent.Invoke();
             _SpriteRenderer.sprite = _TileManager._Tiles[_UIManager._CurrentTile]._AnimationList[_UIManager._AnimationDropdown.value].animationSprites[_AnimSpriteCount];//_AnimationDictionary[_CurrentAnim][_AnimSpriteCount];
+            _UIManager._AnimCounter.text = (_AnimSpriteCount + 1).ToString() + "/3";
         }
         else // Set single sprite
         {
