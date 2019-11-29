@@ -16,8 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown _TileDropdown;
     [SerializeField] private TMP_Dropdown _TileEnumDropdown;
     [HideInInspector] public TMP_Dropdown _AnimationDropdown;
-    [HideInInspector] private SaveDrawing _SaveDrawing;
-    [SerializeField] private TileManager _TileManager;
+    private SaveDrawing _SaveDrawing;
+    private TileManager _TileManager;
     [SerializeField] private GameObject _MarkerHolder;
     [Space(10)]
     [SerializeField] private GameObject _TileGenBackground;
@@ -27,8 +27,6 @@ public class UIManager : MonoBehaviour
     private Camera _Cam;
     public UnityEvent _AnimateToDrawEvent, _DrawToAnimateEvent;
     
-    [SerializeField] private List<AnimationSprites> _PlayerAnimations;
-    [SerializeField] private List<AnimationSprites> _EnemyAnimations;
     [SerializeField] private GameObject _AnimationElements, _DrawingElements;
     private BoxCollider2D _DrawableObjectCollider;
     private SpriteRenderer _DrawableRenderer;
@@ -118,9 +116,9 @@ public class UIManager : MonoBehaviour
                 break;
             case TilesEnum.Player:
 
-                for (int i = 0; i < _PlayerAnimations.Count; i++)
+                for (int i = 0; i < _TileManager._PlayerAnimations.Count; i++)
                 {
-                    tile._AnimationList.Add(_PlayerAnimations[i]);
+                    tile._AnimationList.Add(_TileManager._PlayerAnimations[i]);
                 }
                 
                 //_SaveDrawing.SetAnimationDictionary(tile._AnimationList);
@@ -128,9 +126,9 @@ public class UIManager : MonoBehaviour
                 break;
             case TilesEnum.Enemy:
 
-                for (int i = 0; i < _EnemyAnimations.Count; i++)
+                for (int i = 0; i < _TileManager._EnemyAnimations.Count; i++)
                 {
-                    tile._AnimationList.Add(_EnemyAnimations[i]);
+                    tile._AnimationList.Add(_TileManager._EnemyAnimations[i]);
                 }
                 //_SaveDrawing.SetAnimationDictionary(tile._AnimationList);
 

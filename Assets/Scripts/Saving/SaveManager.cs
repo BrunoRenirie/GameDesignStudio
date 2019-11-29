@@ -106,7 +106,6 @@ public class SaveManager : MonoBehaviour
         //Playmode Data
         if (_LevelData._EntityList.Count > 0)
         {
-            Debug.Log("ye");
             _PlayModeSwitcher._EntityPosList = _LevelData._EntityList;
             _PlayModeSwitcher.LoadEntityPos();
         }

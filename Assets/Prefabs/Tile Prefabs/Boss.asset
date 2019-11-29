@@ -17,4 +17,4 @@ MonoBehaviour:
   _TileEnum: 6
   _Position: {x: 0, y: 0, z: 0}
   _AnimationList: []
-  _Custom: 0
+  _Custom: 1

@@ -91,14 +91,13 @@ public class Enemy : MonoBehaviour
 
         if (_Renderer.flipX)
         {
-            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));
             _Renderer.material.SetTextureScale("_MainTex", new Vector2(1, 1));
-            
+            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(0, 0));          
         }
         else
         {
-            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(1, 0));
             _Renderer.material.SetTextureScale("_MainTex", new Vector2(-1, 1));
+            _Renderer.material.SetTextureOffset("_MainTex", new Vector2(1, 0));
         }
     }
 

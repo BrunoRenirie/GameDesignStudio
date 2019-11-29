@@ -29,24 +29,71 @@ public class ScriptableTile : ScriptableObject
         if (_Custom)
             return;
 
-        if (_Image != null)
-            ES3.SaveImage(_Image.texture, _Name + ".png");
+        switch (_TileEnum)
+        {
+            case TilesEnum.Block:
+
+                if (_Image != null)
+                    ES3.SaveImage(_Image.texture, _Name + ".png");
+
+                break;
+            case TilesEnum.Player:
+
+                _AnimationList.AddRange(TileManager._Instance._PlayerAnimations);
+
+                break;
+            case TilesEnum.Enemy:
+
+                _AnimationList.AddRange(TileManager._Instance._EnemyAnimations);
+
+                break;
+            case TilesEnum.Checkpoint:
+                break;
+            case TilesEnum.Finish:
+                break;
+            case TilesEnum.Wallpaper:
+                break;
+            case TilesEnum.Boss:
+                break;
+        }
     }
 
     public void LoadImage()
     {
-        if (_TileEnum == TilesEnum.Player || _TileEnum == TilesEnum.Enemy || _TileEnum == TilesEnum.Boss || _Custom )
+        if (_Custom)
             return;
 
-        _Image = Resources.Load<Sprite>(_Name);
+        switch (_TileEnum)
+        {
+            case TilesEnum.Block:
 
-        Texture2D LoadedTexture = null;
-        if (!ES3.KeyExists(_Name + ".png"))
-            SaveImage();
+                _Image = Resources.Load<Sprite>(_Name);
 
-        LoadedTexture = ES3.LoadImage(_Name + ".png");
+                Texture2D LoadedTexture = null;
+                if (!ES3.KeyExists(_Name + ".png"))
+                    SaveImage();
 
-        if (LoadedTexture != null)
-            _Image.texture.LoadImage(LoadedTexture.EncodeToPNG());
+                LoadedTexture = ES3.LoadImage(_Name + ".png");
+
+                if (LoadedTexture != null)
+                    _Image.texture.LoadImage(LoadedTexture.EncodeToPNG());
+
+                break;
+            case TilesEnum.Player:
+
+                break;
+            case TilesEnum.Enemy:
+                break;
+            case TilesEnum.Checkpoint:
+                break;
+            case TilesEnum.Finish:
+                break;
+            case TilesEnum.Wallpaper:
+                break;
+            case TilesEnum.Boss:
+                break;
+        }
+
+        
     }
 }

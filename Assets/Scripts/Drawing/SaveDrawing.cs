@@ -83,7 +83,6 @@ public class SaveDrawing : MonoBehaviour
         }
         _UIManager.SetAnimationDropdown(_OptionList);
         ChangeSprite(0);
-        Debug.Log("Successfully organised the list and set the dropdown menu.");
     }
 
     public void ChangeSprite(int spriteCount)

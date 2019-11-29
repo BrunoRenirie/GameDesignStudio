@@ -12,7 +12,7 @@ public class TileManager : MonoBehaviour
     public string _LevelName = "Level";
 
     public GameObject _PlayerPrefab, _EnemyPrefab, _BossPrefab;
-
+    public List<AnimationSprites> _PlayerAnimations, _EnemyAnimations;
     public List<ScriptableTile> _CustomObjects;
 
     private void Awake()
@@ -42,5 +42,13 @@ public class TileManager : MonoBehaviour
         {
             _Tiles[i].LoadImage();
         }
+    }
+
+    public void ResetTiles()
+    {
+        _Tiles = new List<ScriptableTile>();
+        _TileMapTiles = new List<Tile>();
+
+        _Tiles.AddRange(_CustomObjects);
     }
 }

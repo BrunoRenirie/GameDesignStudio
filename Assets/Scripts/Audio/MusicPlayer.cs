@@ -17,7 +17,12 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	private void OnLevelWasLoaded(int level) {
-		LoadAudio(level);;
+		LoadAudio(level);
+
+        if (mute.activeSelf)
+            TempMute();
+        else
+            TempUnMute();
 	}
 
 	private void LoadAudio(int index) {
@@ -52,9 +57,17 @@ public class MusicPlayer : MonoBehaviour {
 	}
 
 	public void TempMute() {
-		mute.SetActive(!mute.active);
-		notMute.SetActive(!notMute.active);
+		mute.SetActive(true);
+		notMute.SetActive(false);
 		muziek = GameObject.Find("Muziek").GetComponent<AudioSource>();
-		muziek.mute = !muziek.mute;
+		muziek.mute = true;
 	}
+
+    public void TempUnMute()
+    {
+        mute.SetActive(false);
+        notMute.SetActive(true);
+        muziek = GameObject.Find("Muziek").GetComponent<AudioSource>();
+        muziek.mute = false;
+    }
 }
