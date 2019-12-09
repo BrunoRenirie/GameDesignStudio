@@ -1,8 +1,11 @@
 ﻿using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicPlayer : MonoBehaviour {
+
 	private AudioSource background;
+    [SerializeField] private AudioMixer _AudioMixer;
 
 	public GameObject notMute;
 	public GameObject mute;
@@ -10,13 +13,15 @@ public class MusicPlayer : MonoBehaviour {
 	private AudioSource muziek;
 	
 	void Start() {
+        /*
 		background = gameObject.AddComponent<AudioSource>();
 		background.volume = 0.3f;
 		background.loop = true;
 		LoadAudio(0);
-	}
+        */
+    }
 
-	private void OnLevelWasLoaded(int level) {
+	public void LoadLevel(int level) {
 		LoadAudio(level);
 
         if (mute.activeSelf)
@@ -59,15 +64,25 @@ public class MusicPlayer : MonoBehaviour {
 	public void TempMute() {
 		mute.SetActive(true);
 		notMute.SetActive(false);
+
+        _AudioMixer.SetFloat("MusicVolume", -80);
+
+        /*
 		muziek = GameObject.Find("Muziek").GetComponent<AudioSource>();
 		muziek.mute = true;
-	}
+        */
+    }
 
     public void TempUnMute()
     {
         mute.SetActive(false);
         notMute.SetActive(true);
+
+        _AudioMixer.SetFloat("MusicVolume", 0);
+
+        /*
         muziek = GameObject.Find("Muziek").GetComponent<AudioSource>();
         muziek.mute = false;
+        */
     }
 }

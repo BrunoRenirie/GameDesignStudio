@@ -18,8 +18,8 @@ public class Pause : MonoBehaviour
             spawnPanel = true;
         }else
         {
-          animator =  GameObject.Find("PauzePanel2").GetComponent<Animator>();
-          animator.SetBool("IsOpen", true);
+            animator =  GameObject.Find("PauzePanel2").GetComponent<Animator>();
+            animator.SetBool("IsOpen", true);
         }
     }
 }

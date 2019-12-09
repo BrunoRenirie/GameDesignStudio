@@ -28,6 +28,18 @@ public class TileManager : MonoBehaviour
         _Tiles.AddRange(_CustomObjects);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            SaveTiles();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadTiles();
+        }
+    }
+
     public void SaveTiles()
     {
         for (int i = 0; i < _Tiles.Count; i++)

@@ -20,25 +20,36 @@ public class SaveManager : MonoBehaviour
 
     private void Start()
     {
-        _TileManager = TileManager._Instance;
-        _PlayModeSwitcher = PlayModeSwitcher._Instance;
-        _LevelEditorManager = LevelEditorManager._Instance;
-        _SceneSwitcher = SceneSwitcher._Instance;
+        GetReferences();
 
         StartCoroutine(DelayLoad());
 
         _SceneSwitcher._SceneSaveEvent.AddListener(Save);
-        _SceneSwitcher._SceneLoadEvent.AddListener(LoadLevelDelayed);
+        _SceneSwitcher._SceneLoadEvent.AddListener(LoadDelay);
     }
 
     private void Save()
     {
-        _LevelData = new LevelData
-        {
-            _EntityList = _PlayModeSwitcher._EntityPosList,
-            _TileList = _TileManager._Tiles,
-            _TileDict = _LevelEditorManager.GetWorldTiles()
-        };
+        GetReferences();
+
+        LevelData newData = new LevelData();
+
+        if (_PlayModeSwitcher != null)
+            newData._EntityList = _PlayModeSwitcher._EntityPosList;
+        else if (_LevelData != null)
+            newData._EntityList = _LevelData._EntityList;
+
+        if(_TileManager != null)
+            newData._TileList = _TileManager._Tiles;
+        else if (_LevelData != null)
+            newData._TileList = _LevelData._TileList;
+
+        if (_LevelEditorManager != null)
+            newData._TileDict = _LevelEditorManager.GetWorldTiles();
+        else if (_LevelData != null)
+            newData._TileDict = _LevelData._TileDict;
+
+        _LevelData = newData;
 
         _TileManager.SaveTiles();
 
@@ -49,6 +60,7 @@ public class SaveManager : MonoBehaviour
 
     public void LoadLevel()
     {
+        GetReferences();
         if (ES3.KeyExists(_TileManager._LevelName))
         {
             LevelData Data = ES3.Load<LevelData>(_TileManager._LevelName);
@@ -63,7 +75,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            SaveLevel();
+            SaveDelay();
             return;
         }
 
@@ -100,23 +112,23 @@ public class SaveManager : MonoBehaviour
         _TileManager.LoadTiles();
 
         //Tiles Data
-        if (_LevelData._TileDict.Count > 0)
+        if (_LevelData._TileDict.Count > 0 && _LevelEditorManager != null)
             _LevelEditorManager.LoadLevel(_LevelData._TileDict);
 
         //Playmode Data
-        if (_LevelData._EntityList.Count > 0)
+        if (_LevelData._EntityList.Count > 0 && _PlayModeSwitcher != null)
         {
             _PlayModeSwitcher._EntityPosList = _LevelData._EntityList;
             _PlayModeSwitcher.LoadEntityPos();
         }
     }
 
-    public void LoadLevelDelayed()
+    public void LoadDelay()
     {
         StartCoroutine(DelayLoad());
     }
 
-    public void SaveLevel()
+    public void SaveDelay()
     {
         StartCoroutine(DelaySave());
     }
@@ -133,5 +145,13 @@ public class SaveManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         Save();
+    }
+
+    public void GetReferences()
+    {
+        _TileManager = TileManager._Instance;
+        _PlayModeSwitcher = PlayModeSwitcher._Instance;
+        _LevelEditorManager = LevelEditorManager._Instance;
+        _SceneSwitcher = SceneSwitcher._Instance;
     }
 }

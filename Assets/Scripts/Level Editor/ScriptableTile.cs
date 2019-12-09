@@ -39,12 +39,42 @@ public class ScriptableTile : ScriptableObject
                 break;
             case TilesEnum.Player:
 
-                _AnimationList.AddRange(TileManager._Instance._PlayerAnimations);
+                for (int i = 0; i < _AnimationList.Count; i++)
+                {
+                    for (int j = 0; j < _AnimationList[i].animationSprites.Count; j++)
+                    {
+                        //Path = Enum name + Animation name + Animation integer + file extension
+                        string path = _TileEnum.ToString() + _AnimationList[i].animation.ToString() + j.ToString() + ".png";
+
+                        if (CompareTexture(_AnimationList[i].animationSprites[j].texture, _AnimationList[i].resetSprite.texture))
+                            break;
+                        else
+                        {
+                            ES3.DeleteFile(path);
+                            ES3.SaveImage(_AnimationList[i].animationSprites[j].texture, path);
+                        }
+                    }
+                }
 
                 break;
             case TilesEnum.Enemy:
 
-                _AnimationList.AddRange(TileManager._Instance._EnemyAnimations);
+                for (int i = 0; i < _AnimationList.Count; i++)
+                {
+                    for (int j = 0; j < _AnimationList[i].animationSprites.Count; j++)
+                    {
+                        //Path = Enum name + Animation name + Animation integer + file extension
+                        string path = _TileEnum.ToString() + _AnimationList[i].animation.ToString() + j.ToString() + ".png";
+
+                        if (CompareTexture(_AnimationList[i].animationSprites[j].texture, _AnimationList[i].resetSprite.texture))
+                            break;
+                        else
+                        {
+                            ES3.DeleteFile(path);
+                            ES3.SaveImage(_AnimationList[i].animationSprites[j].texture, path);
+                        }
+                    }
+                }
 
                 break;
             case TilesEnum.Checkpoint:
@@ -81,8 +111,37 @@ public class ScriptableTile : ScriptableObject
                 break;
             case TilesEnum.Player:
 
+                _AnimationList = new List<AnimationSprites>();
+                _AnimationList.AddRange(TileManager._Instance._PlayerAnimations);
+
+                for (int i = 0; i < _AnimationList.Count; i++)
+                {
+                    for (int j = 0; j < _AnimationList[i].animationSprites.Count; j++)
+                    {
+                        //Path = Enum name + Animation name + Animation integer + file extension
+                        string path = _TileEnum.ToString() + _AnimationList[i].animation.ToString() + j.ToString() + ".png";
+                        if (ES3.FileExists(path)) 
+                            _AnimationList[i].animationSprites[j].texture.LoadImage(ES3.LoadImage(path).EncodeToPNG());
+                    }
+                }
+
                 break;
             case TilesEnum.Enemy:
+
+                _AnimationList = new List<AnimationSprites>();
+                _AnimationList.AddRange(TileManager._Instance._EnemyAnimations);
+
+                for (int i = 0; i < _AnimationList.Count; i++)
+                {
+                    for (int j = 0; j < _AnimationList[i].animationSprites.Count; j++)
+                    {
+                        //Path = Enum name + Animation name + Animation integer + file extension
+                        string path = _TileEnum.ToString() + _AnimationList[i].animation.ToString() + j.ToString();
+                        if (ES3.FileExists(path))
+                            _AnimationList[i].animationSprites[j].texture.LoadImage(ES3.LoadImage(path + ".png").EncodeToPNG());
+                    }
+                }
+
                 break;
             case TilesEnum.Checkpoint:
                 break;
@@ -95,5 +154,24 @@ public class ScriptableTile : ScriptableObject
         }
 
         
+    }
+
+    private bool CompareTexture(Texture2D first, Texture2D second)
+    {
+        Color[] firstPix = first.GetPixels();
+        Color[] secondPix = second.GetPixels();
+        if (firstPix.Length != secondPix.Length)
+        {
+            return false;
+        }
+        for (int i = 0; i < firstPix.Length; i++)
+        {
+            if (firstPix[i] != secondPix[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

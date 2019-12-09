@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: E_Shoot
   m_EditorClassIdentifier: 
   animationSprites:
-  - {fileID: 21300000, guid: 3168c47abcc5d15419ae52f18606522f, type: 3}
-  - {fileID: 21300000, guid: f1b641c674eb993459ec29565b4a78b5, type: 3}
-  - {fileID: 21300000, guid: 19e80958490b5d4459984cfe9445b93f, type: 3}
+  - {fileID: 21300000, guid: 474b2f33ebb73994d85e3f08b9d48204, type: 3}
+  - {fileID: 21300000, guid: ae7f8c2c0bc8d80498cfb4de508eadaf, type: 3}
+  - {fileID: 21300000, guid: ef5373a577d98f247a49eefbff7ef09d, type: 3}
   animation: 3
   dropDownName: Shoot
-  dropDownSprite: {fileID: 21300000, guid: dcd38b905b293a74fba91e35141ce2e1, type: 3}
-  resetSprite: {fileID: 21300000, guid: 474b2f33ebb73994d85e3f08b9d48204, type: 3}
+  dropDownSprite: {fileID: 21300000, guid: 474b2f33ebb73994d85e3f08b9d48204, type: 3}
+  resetSprite: {fileID: 21300000, guid: 3e4daf077f8658a4887451a6606de1ac, type: 3}

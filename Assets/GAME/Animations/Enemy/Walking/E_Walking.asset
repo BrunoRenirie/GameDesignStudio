@@ -19,4 +19,4 @@ MonoBehaviour:
   animation: 1
   dropDownName: Walking
   dropDownSprite: {fileID: 21300000, guid: b21a47c577171664db8ce215a26df314, type: 3}
-  resetSprite: {fileID: 21300000, guid: 474b2f33ebb73994d85e3f08b9d48204, type: 3}
+  resetSprite: {fileID: 21300000, guid: bd247b7a4da58ff46bfc91cefdf2b718, type: 3}

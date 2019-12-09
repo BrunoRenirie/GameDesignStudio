@@ -7,11 +7,27 @@ public class UiManagerMainMenu : MonoBehaviour
 {
     private TileManager _TileManager;
 
-    [SerializeField] private GameObject _ResetScreen;
+    [SerializeField] private GameObject _ResetScreen, _MainMenuScreen;
 
+    [SerializeField] private bool _Closed;
     private void Start()
     {
         _TileManager = TileManager._Instance;
+    }
+
+    private void Update()
+    {
+        if(_MainMenuScreen == null && _Closed)
+        {
+            CloseMainMenu();
+        }
+    }
+
+    public void CloseMainMenu()
+    {
+        _MainMenuScreen = GameObject.FindGameObjectWithTag("MainMenuScreen");
+        _MainMenuScreen.SetActive(false);
+        _Closed = true;
     }
 
     public void EnableResetScreen()

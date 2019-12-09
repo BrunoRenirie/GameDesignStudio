@@ -76,9 +76,14 @@ public class PictureGallery : MonoBehaviour
     private void Update()
     {
         if(ObjectCanvas.enabled == true)
+        {
             LoadGallery();
+        }
         else
+        {
             BigPhotoScript.BigPhoto.gameObject.SetActive(false);
+        }
+            
     }
 
     private void LoadGallery()

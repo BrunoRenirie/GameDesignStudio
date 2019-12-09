@@ -14,9 +14,10 @@ public class LevelEditorManager : MonoBehaviour
     private PlayModeSwitcher _PlaymodeSwitcher;
 
     private Tilemap _TileMap;
+
     [HideInInspector] public GameObject _Player, _Boss;
 
-    private bool _Editing = true;
+    [HideInInspector] public bool _Editing = true;
 
     private void Awake()
     {
@@ -40,20 +41,35 @@ public class LevelEditorManager : MonoBehaviour
         Vector3 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         MousePos.z = 0;
 
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+        if(Application.platform == RuntimePlatform.WindowsEditor)
         {
-            switch (_EditorUi._CurrentTool)
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                case EditorTools.Move:
-                    MoveUpdate();
-                    break;
-                case EditorTools.Place:
-                    PlaceUpdate(MousePos);
-                    break;
-                case EditorTools.Remove:
-                    RemoveUpdate(MousePos);
-                    break;
+                ToolUpdate(MousePos);
             }
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            {
+                ToolUpdate(MousePos);
+            }
+        }
+    }
+
+    public void ToolUpdate(Vector3 MousePos)
+    {
+        switch (_EditorUi._CurrentTool)
+        {
+            case EditorTools.Move:
+                MoveUpdate();
+                break;
+            case EditorTools.Place:
+                PlaceUpdate(MousePos);
+                break;
+            case EditorTools.Remove:
+                RemoveUpdate(MousePos);
+                break;
         }
     }
 
@@ -174,7 +190,7 @@ public class LevelEditorManager : MonoBehaviour
                 Destroy(data.gameObject);
 
                 _PlaymodeSwitcher.SaveEntityPos();
-                SaveManager._Instance.SaveLevel();
+                SaveManager._Instance.SaveDelay();
             }
         }
     }

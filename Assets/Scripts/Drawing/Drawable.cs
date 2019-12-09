@@ -143,7 +143,7 @@ namespace FreeDraw
 
                 // Check if the current mouse position overlaps our image
                 Collider2D hit = Physics2D.OverlapPoint(mouse_world_position, Drawing_Layers.value);
-                if (hit != null && hit.transform != null && _Renderer.sprite != null)
+                if (hit != null && hit.transform != null && _Renderer.sprite != null && !TileManager._Instance._Tiles[UIManager.Instance._CurrentTile]._Custom)
                 {
                     // We're over the texture we're drawing on!
                     // Use whatever function the current brush is

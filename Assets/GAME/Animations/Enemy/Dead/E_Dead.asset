@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: E_Dead
   m_EditorClassIdentifier: 
   animationSprites:
-  - {fileID: 21300000, guid: df097c8ef97272143a465b9b41787c82, type: 3}
   - {fileID: 21300000, guid: 214a67f5c48e51d469e76b60bfd5e29b, type: 3}
   - {fileID: 21300000, guid: 01d57ed7b18a63349baa9e5fa79ca412, type: 3}
+  - {fileID: 21300000, guid: 316dae53d06dc2346b249f486e09b1c3, type: 3}
   animation: 5
   dropDownName: Dead
-  dropDownSprite: {fileID: 21300000, guid: 7a88de7707810c04fb028a5de057f2ca, type: 3}
-  resetSprite: {fileID: 21300000, guid: 474b2f33ebb73994d85e3f08b9d48204, type: 3}
+  dropDownSprite: {fileID: 21300000, guid: 214a67f5c48e51d469e76b60bfd5e29b, type: 3}
+  resetSprite: {fileID: 21300000, guid: ed432ec0a23b1084ea1d42cf8279e1d4, type: 3}

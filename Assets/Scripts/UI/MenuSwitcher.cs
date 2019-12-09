@@ -26,7 +26,7 @@ public class MenuSwitcher : MonoBehaviour
         {
             Application.Quit();
         }
-        SceneManager.LoadScene(sceneBuildIndex: sceneIndex);
+        SceneSwitcher._Instance.StartCoroutine(SceneSwitcher._Instance.LoadNextScene(sceneIndex));
      
 
     }

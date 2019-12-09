@@ -7,6 +7,7 @@ TagManager:
   - Drawable
   - Enemy
   - Boss
+  - MainMenuScreen
   layers:
   - Default
   - TransparentFX

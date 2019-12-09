@@ -81,7 +81,6 @@ public class PlayModeSwitcher : MonoBehaviour
         List<GameObject> oldEntities = new List<GameObject>();
         _EntityList = new List<ObjectTileData>();
 
-        Debug.Log("starting load");
         foreach (KeyValuePair<GameObject, Vector3> Entity in _EntityPosList)
         {
             Entity.Key.transform.position = Entity.Value;

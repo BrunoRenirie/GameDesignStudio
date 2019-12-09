@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class Health : MonoBehaviour
     private bool _Invincible;
 
     private Rigidbody2D _Rb;
+    private Image _HealthSlider;
 
     private void Awake()
     {
         _Rb = GetComponent<Rigidbody2D>();
-
+        _HealthSlider = GetComponentInChildren<Image>();
         _maxHP = _hp;
     }
 
@@ -27,6 +29,13 @@ public class Health : MonoBehaviour
         {
             _Dead = true;
         }
+
+        _HealthSlider.fillAmount = 1 + ((_hp - _maxHP) / _maxHP);
+
+        if (LevelEditorManager._Instance._Editing)
+            _HealthSlider.gameObject.SetActive(false);
+        else
+            _HealthSlider.gameObject.SetActive(true);
     }
 
     public void TakeDamage(float damage, AttackTypes type, Vector2 origin)
