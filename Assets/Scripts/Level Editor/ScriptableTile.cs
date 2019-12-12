@@ -39,8 +39,10 @@ public class ScriptableTile : ScriptableObject
                 break;
             case TilesEnum.Player:
 
+                
                 for (int i = 0; i < _AnimationList.Count; i++)
                 {
+ 
                     for (int j = 0; j < _AnimationList[i].animationSprites.Count; j++)
                     {
                         //Path = Enum name + Animation name + Animation integer + file extension

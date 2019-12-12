@@ -22,7 +22,8 @@ public class MusicPlayer : MonoBehaviour {
     }
 
 	public void LoadLevel(int level) {
-		LoadAudio(level);
+
+		//LoadAudio(level);
 
         if (mute.activeSelf)
             TempMute();

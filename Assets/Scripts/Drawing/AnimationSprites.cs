@@ -10,4 +10,13 @@ public class AnimationSprites : ScriptableObject
     public string dropDownName;
     public Sprite dropDownSprite;
     public Sprite resetSprite;
+    public List<bool> animationImports;
+
+    public void Initialize()
+    {
+        for (int i = 0; i < animationSprites.Count; i++)
+        {
+            animationImports.Add(false);
+        }
+    }
 }

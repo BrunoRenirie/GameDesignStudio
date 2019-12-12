@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class UiManagerMainMenu : MonoBehaviour
 {
+    public static UiManagerMainMenu _Instance;
     private TileManager _TileManager;
 
-    [SerializeField] private GameObject _ResetScreen, _MainMenuScreen;
+    [SerializeField] private GameObject _ResetScreen, _MainMenuScreen, _ReturnButton;
 
     [SerializeField] private bool _Closed;
     private void Start()
@@ -26,7 +27,12 @@ public class UiManagerMainMenu : MonoBehaviour
     public void CloseMainMenu()
     {
         _MainMenuScreen = GameObject.FindGameObjectWithTag("MainMenuScreen");
-        _MainMenuScreen.SetActive(false);
+
+        if(_MainMenuScreen != null)
+        {
+            _MainMenuScreen.SetActive(false);
+
+        }
         _Closed = true;
     }
 
@@ -50,5 +56,10 @@ public class UiManagerMainMenu : MonoBehaviour
         }
 
         _TileManager.ResetTiles(); 
+    }
+
+    public void ToggleReturnButton()
+    {
+        _ReturnButton.SetActive(_ReturnButton.activeSelf);
     }
 }

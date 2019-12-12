@@ -13,6 +13,8 @@ public class SceneSwitcher : MonoBehaviour
 
     [HideInInspector] public UnityEvent _SceneSaveEvent, _SceneLoadEvent;
 
+    private UiManagerMainMenu _UiManager;
+
     [Header("Ui Elements")]
     [SerializeField] private Image _LoadingScreen;
     [SerializeField] private Image _ProgressBar;
@@ -27,16 +29,21 @@ public class SceneSwitcher : MonoBehaviour
             _Instance = this;
         else
             Destroy(gameObject);
+
     }
     private void Start()
     {
         _MusicPlayer = GetComponentInChildren<MusicPlayer>();
+        _UiManager = GetComponentInChildren<UiManagerMainMenu>();
 
         SceneManager.activeSceneChanged += SaveLevel;
 
         DontDestroyOnLoad(gameObject);
 
         _Starting = false;
+
+
+        StartCoroutine(LoadUnloadScene(3));
     }
 
     public void SwitchScene()
@@ -49,6 +56,7 @@ public class SceneSwitcher : MonoBehaviour
                 if (_SceneLoadEvent.GetPersistentEventCount() > 0)
                     _SceneLoadEvent.Invoke();
             }
+
         }
         StartCoroutine(LoadNextScene(0));
     }
@@ -91,5 +99,19 @@ public class SceneSwitcher : MonoBehaviour
         _LoadingScreen.gameObject.SetActive(false);
         _MusicPlayer.LoadLevel(sceneToLoad);
         
+    }
+
+    private IEnumerator LoadUnloadScene(int scene)
+    {
+        AsyncOperation LoadingOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        
+        while (!LoadingOperation.isDone)
+        {
+            yield return null;
+        }
+
+        SceneManager.UnloadSceneAsync(scene);
+
+        yield return null;
     }
 }

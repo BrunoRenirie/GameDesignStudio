@@ -171,7 +171,10 @@ public class PictureGallery : MonoBehaviour
     /// </summary>
     public void ImportPicture()
     {
-        StartCoroutine(CopyImage());
+        if (!TileManager._Instance._Tiles[UIManager.Instance._CurrentTile]._Custom)
+            StartCoroutine(CopyImage());
+
+        UIManager.Instance.CloseGallery();
     }
 
     IEnumerator CopyImage()
@@ -192,7 +195,8 @@ public class PictureGallery : MonoBehaviour
             //BigPhotoScript.BigPhoto.sprite
             //UsePhoto();
 
-            SaveDrawing._Instance._SpriteRenderer.sprite.texture.LoadImage(bytes);
+            if(!TileManager._Instance._Tiles[UIManager.Instance._CurrentTile]._Custom)
+                SaveDrawing._Instance._SpriteRenderer.sprite.texture.LoadImage(bytes);
         }
     }
 }

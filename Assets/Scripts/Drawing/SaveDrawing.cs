@@ -109,6 +109,7 @@ public class SaveDrawing : MonoBehaviour
     /// </summary>
     public void PhotoToSprite(Sprite _sprite)
     {
+        _SpriteRenderer.sprite.rect.Set(_sprite.rect.x, _sprite.rect.y, _sprite.rect.width, _sprite.rect.height);
         _SpriteRenderer.sprite.texture.LoadImage(_sprite.texture.EncodeToJPG());
     }
 
